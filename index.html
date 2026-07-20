@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>竞彩足球研判</title><style>
+:root{--bg:#f5f6f8;--card:#fff;--blue:#1a5276;--g:#27ae60;--r:#e74c3c;--o:#e67e22;--gr:#888}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:#222}
+.top{background:linear-gradient(135deg,#0d253f,var(--blue));color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;position:sticky;top:0;z-index:10}
+.top h1{font-size:18px}.top .ver{font-size:9px;opacity:.7}
+.nav{display:flex;gap:2px;padding:6px 14px;background:#fff;border-bottom:1px solid #e0e0e0;overflow-x:auto;position:sticky;top:52px;z-index:9}
+.nav span{padding:10px 16px;font-size:12px;cursor:pointer;border-radius:6px 6px 0 0;white-space:nowrap;color:#666;transition:.15s}
+.nav span:hover{background:#f0f2f5}.nav span.on{color:var(--blue);font-weight:bold;border-bottom:2px solid var(--blue)}
+.main{max-width:900px;margin:0 auto;padding:14px}
+.card{background:var(--card);border-radius:10px;padding:16px 20px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card h3{font-size:13px;color:var(--blue);margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #eaf2f8;display:flex;justify-content:space-between;align-items:center}
+.mc{border:1px solid #e8e8e8;border-radius:8px;padding:14px 16px;margin-bottom:8px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px}
+.mc:hover{box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.mc .lg{grid-column:1;grid-row:1;font-size:10px;color:var(--blue);font-weight:bold}
+.mc .teams{grid-column:1;grid-row:2;font-size:15px;font-weight:bold}.mc .teams .vs{color:#bbb;margin:0 8px;font-weight:normal}
+.mc .odds{grid-column:1;grid-row:3;font-size:10px;color:var(--gr)}
+.mc .info{grid-column:1;grid-row:4;font-size:9.5px;color:var(--gr);line-height:1.6}
+.mc .pa{grid-column:2;grid-row:1/5;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:70px}
+.pick{display:inline-block;padding:6px 14px;border-radius:5px;font-size:13px;font-weight:bold}
+.pw{background:#d5f5e3;color:var(--g)}.pd{background:#fef9e7;color:var(--o)}.pa{background:#eee;color:var(--gr)}
+.plan{border-left:3px solid var(--o);padding:12px 16px;margin:8px 0;border-radius:0 8px 8px 0;background:#fffdf5}
+.plan.silver{border-color:#7f8c8d;background:#fafafa}
+.plan h4{font-size:12px;margin-bottom:6px}.plan .l{padding:5px 0;font-size:11px}
+.plan .n{display:inline-block;width:20px;height:20px;border-radius:50%;text-align:center;line-height:20px;font-size:10px;color:#fff;margin-right:6px}
+table{width:100%;border-collapse:collapse;font-size:10.5px}
+th{background:#f5f7fa;padding:6px;text-align:left;font-weight:bold;border-bottom:2px solid #dee2e6;font-size:10px}
+td{padding:6px;border-bottom:1px solid #eee;vertical-align:top}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stats .st{flex:1;min-width:90px;text-align:center;padding:12px;border-radius:6px;background:#fafbfc;border:1px solid #eee}
+.stats .st .n{font-size:22px;font-weight:bold}.stats .st .l{font-size:9px;color:var(--gr)}
+.lesson{padding:8px 12px;margin:4px 0;border-left:3px solid var(--blue);background:#fafcfd;border-radius:0 5px 5px 0;font-size:10.5px;line-height:1.6}
+.lesson.bad{border-left-color:var(--r);background:#fffafa}
+@media(min-width:700px){.mc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:10px}}
+</style></head><body>
+<div class="top"><h1>⚽ 竞彩足球研判看板</h1><span class="ver">数据每3h自动更新 · 25条规则引擎</span></div>
+<div class="nav"><span class="on" onclick="pg('today',this)">📅 今日</span><span onclick="pg('history',this)">📋 历史</span><span onclick="pg('rules',this)">🧠 规则</span><span style="margin-left:auto;font-size:10px;cursor:pointer" onclick="location.reload()">🔄 刷新</span></div>
+<div class="main" id="main"></div>
+<script>
+let DB;
+(async function(){
+  try{let r=await fetch("data.json");DB=await r.json()}catch(e){DB={today:{matches:[]},yesterday:{results:[]},history:[],rules:[],updated:"加载失败"}}
+  pg("today",document.querySelector(".nav span"));
+})();
+
+function an(m){
+  let a=[],d="待定",s=3,c="pd",hd=false;
+  if(m.odds){let[w,_,l]=m.odds.split("/").map(Number),df=Math.abs(w-l);
+    if(df>2){d=l<w?"客胜":"主胜";s=4;c="pw"}else if(df>0.5){d=l<w?"客胜":"主胜";s=3;c="pw"}else{d="双选/让球";s=2;c="pd";a.push("R11均势局禁单选");hd=true}
+    if(w<1.4||l<1.4){a.push("R24低赔陷阱")}}
+  if(m.fm&&/平局率50%/.test(m.fm)){a.push("R6伪不败");hd=true}
+  return{d,s,c,a,hd};
+}
+
+function pg(p,el){
+  document.querySelectorAll(".nav span").forEach(s=>{if(s.textContent.includes("刷新"))return;s.classList.remove("on")});
+  if(el)el.classList.add("on");
+  let h="";
+  if(p==="today")h=rt();else if(p==="history")h=rh();else if(p==="rules")h=rr();
+  document.getElementById("main").innerHTML=h;
+}
+
+function rt(){
+  let ms=(DB.today||{}).matches||[];
+  if(!ms.length)return`<div class="card"><div style="text-align:center;padding:30px;color:var(--gr)">📭 暂无今日比赛<br><span style="font-size:10px">每天早上自动更新</span></div></div>`;
+  let safe=ms.filter(m=>!an(m).hd);
+  return`<div class="card"><h3>📅 ${DB.today.date||"--"} · ${ms.length}场</h3><div class="mc-grid">${ms.map(m=>{let a=an(m);return`<div class="mc" style="border-left:3px solid ${a.hd?'var(--r)':'var(--g)'}"><div class="lg">${m.lg||""} · ${m.tm||""} · ${m.h||""}主场 ${m.hr?`#${m.hr}`:''}</div><div class="teams">${m.h||"?"}<span class="vs">VS</span>${m.a||"?"} ${m.ar?`<span style="font-size:9px;color:#aaa">#${m.ar}</span>`:''}</div><div class="odds">${m.odds||"--"} | ${m.h2h||""}</div><div class="info">${m.inj||""}<br>${m.fm||""}<br>${m.xp||""}</div><div class="pa"><span class="pick ${a.c}">${a.d}</span><span style="font-size:10px;color:#f39c12">${'★'.repeat(a.s)}</span>${a.alerts.map(x=>`<span style="font-size:8px;color:var(--r);display:block">${x}</span>`).join('')}</div></div>`}).join('')}</div></div>
+  ${safe.length>=2?`<div class="card"><h3>🎯 串关</h3><div class="plan"><h4 style="color:var(--o)">🥇 2串1</h4>${safe.slice(0,2).map((m,i)=>`<div class="l"><span class="n" style="background:var(--o)">${i+1}</span><b>${m.h} VS ${m.a}</b> → <span style="color:var(--o)">${an(m).d}</span></div>`).join('')}<div style="font-size:9px;color:var(--gr);margin-top:4px">自动剔除预警场次</div></div>${safe.length>=3?`<div class="plan silver"><h4 style="color:#7f8c8d">🥈 3串1</h4>${safe.slice(0,3).map((m,i)=>`<div class="l"><span class="n" style="background:#7f8c8d">${i+1}</span><b>${m.h} VS ${m.a}</b> → ${an(m).d}</div>`).join('')}</div>`:''}</div>`:''}`;
+}
+
+function rh(){
+  let h=DB.history||[], tot=h.reduce((s,x)=>s+x.t,0), ok=h.reduce((s,x)=>s+x.ok,0);
+  let rs=(DB.yesterday||{}).results||[], done=rs.filter(r=>r.w!==null), wins=done.filter(r=>r.w);
+  return`<div class="card"><h3>📊 累计</h3><div class="stats">${[{l:"总场次",v:tot,c:"var(--blue)"},{l:"正确",v:ok,c:"var(--g)"},{l:"准确率",v:tot?Math.round(ok/tot*100)+"%":"--",c:"var(--o)"},{l:"规则",v:(DB.rules||[]).length,c:"var(--blue)"}].map(x=>`<div class="st"><div class="n" style="color:${x.c}">${x.v}</div><div class="l">${x.l}</div></div>`).join('')}</div></div>
+  ${rs.length?`<div class="card"><h3>📋 昨日赛果</h3><table><tr><th>对阵</th><th>比分</th><th>预测</th><th>结果</th><th>分析</th></tr>${rs.map(r=>`<tr><td>${r.m}</td><td><b>${r.r}</b></td><td>${r.p}</td><td>${r.w===true?'<span style="color:var(--g)">✅</span>':r.w===false?'<span style="color:var(--r)">❌</span>':'<span style="color:var(--o)">⏳</span>'}</td><td style="font-size:9.5px">${r.note||""}</td></tr>`).join('')}</table></div>`:''}
+  <div class="card"><h3>🧠 复盘日志</h3>${h.map(x=>`<div class="lesson ${parseInt(x.r)<60?'bad':''}"><b>${x.d}</b> | ${x.t}场→${x.ok}正确(${x.r}) | 2串1:${x.p2} | 长串:${x.p3}<br>📝 ${x.lesson}</div>`).join('')}</div>`;
+}
+
+function rr(){
+  let cats=[...new Set((DB.rules||[]).map(r=>r.c))];
+  return`<div class="card"><h3>🧠 ${(DB.rules||[]).length}条规则</h3>${cats.map(c=>`<div style="margin-bottom:10px"><b style="color:var(--blue)">▸ ${c}</b><table style="margin-top:2px"><tr><th>#</th><th>规则</th><th>内容</th><th>来源</th></tr>${(DB.rules||[]).filter(r=>r.c===c).map(r=>`<tr><td>${r.id}</td><td><b>${r.n}</b></td><td style="font-size:9.5px">${r.d}</td><td style="font-size:9px;color:var(--gr)">${r.f}</td></tr>`).join('')}</table></div>`).join('')}</div>`;
+}
+</script></body></html>
