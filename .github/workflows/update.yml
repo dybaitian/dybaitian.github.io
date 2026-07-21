@@ -14,20 +14,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests
-      - name: 测试Fotmob连通性
-        run: |
-          python -c "
-          import requests
-          h = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'}
-          r = requests.get('https://www.fotmob.com/api/leagues?id=76&season=2026', headers=h, timeout=15)
-          print('Status:', r.status_code)
-          print('Type:', r.headers.get('content-type','')[:50])
-          print('Body:', r.text[:300])
-          "
       - run: python fetch.py
         continue-on-error: true
-      - name: 检查data.json
-        run: head -30 data.json
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "📡 自动更新"

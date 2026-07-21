@@ -398,6 +398,71 @@ function predict(m) {
     sg.push("主队主场强势");
   }
 
+  // 🔥 战意/动机因子 (排名推断)
+  // 联赛规模估算: K1=12, 巴甲=20, 瑞超=16, 芬超=12, 欧冠=资格赛
+  let lgSize = /巴甲/.test(m.lg||"") ? 20 : /瑞超/.test(m.lg||"") ? 16 : 12;
+  let hMotiv = 0, aMotiv = 0;
+  if (/欧冠|🏆/.test(m.lg||"")) {
+    // 欧冠资格赛: 单场淘汰, 双方拼命, 弱队死守求平
+    hMotiv = 5; aMotiv = 5;
+    if (marketProb) {
+      try {
+        let [wOdds] = m.odds.split("/").map(Number);
+        if (wOdds < 1.70) { final.pD += 0.03; bt.push("欧冠资格赛: 强队防平, 弱队死守"); }
+      } catch(e) {}
+    }
+  } else {
+    // 联赛战意: 排名位置决定动机
+    if (m.hr === 1 || m.hr === 2) { hMotiv = 4; bt.push("主队争冠/冲欧战"); }
+    else if (m.hr >= lgSize - 2) { hMotiv = 5; bt.push("主队保级战意强"); }
+    else if (m.hr >= lgSize - 4) { hMotiv = 3; bt.push("主队保级压力"); }
+    else if (m.hr <= 5) { hMotiv = 2; }
+
+    if (m.ar === 1 || m.ar === 2) { aMotiv = 4; bt.push("客队争冠/冲欧战"); }
+    else if (m.ar >= lgSize - 2) { aMotiv = 5; bt.push("客队保级战意强"); }
+    else if (m.ar >= lgSize - 4) { aMotiv = 3; bt.push("客队保级压力"); }
+    else if (m.ar <= 5) { aMotiv = 2; }
+
+    // 中游无欲无求 → 平局概率上升
+    let hMid = m.hr > 5 && m.hr < lgSize - 4;
+    let aMid = m.ar > 5 && m.ar < lgSize - 4;
+    if (hMid && aMid) { final.pD += 0.03; sg.push("双方中游战意不足→平局↑"); }
+    else if (hMid && !aMid && aMotiv >= 3) { final.pA += 0.03; final.pH -= 0.03; sg.push("客队战意远强于主队"); }
+    else if (aMid && !hMid && hMotiv >= 3) { final.pH += 0.03; final.pA -= 0.03; sg.push("主队战意远强于客队"); }
+    // 保级队打强队的特殊逻辑: 保级队主场拼命
+    if (hMotiv >= 5 && aMotiv <= 2) { final.pH += 0.03; final.pA -= 0.02; final.pD += 0.01; sg.push("主队保级搏命, 主场加成"); }
+    if (aMotiv >= 5 && hMotiv <= 2) { final.pA += 0.03; final.pH -= 0.02; final.pD += 0.01; sg.push("客队保级搏命"); }
+    // 争冠强队打保级队: 强队可能被拖入苦战
+    if ((hMotiv >= 4 && aMotiv >= 5) || (hMotiv >= 5 && aMotiv >= 4)) { final.pD += 0.04; sg.push("战意对冲, 平局概率↑"); }
+  }
+
+  // 🔥 赛季阶段 (月份推断)
+  let mon = new Date().getMonth() + 1;
+  if (mon >= 3 && mon <= 4) { final.pD += 0.02; bt.push("赛季开局, 冷门偏多"); }
+  else if (mon >= 9 && mon <= 10) { final.pD -= 0.02; bt.push("赛季末段, 战意分化"); }
+
+  // 🔥 强强/弱弱对话
+  if (m.hr <= 3 && m.ar <= 3) { final.pD += 0.03; sg.push("强强对话, 平局率偏高"); }
+  if (m.hr >= lgSize-2 && m.ar >= lgSize-2 && m.hr > 0) { final.pD += 0.02; rk.push("弱弱对话, 不确定性高"); }
+
+  // 🔥 欧战疲劳
+  if (/欧战|欧协|欧联/.test(m.fm||"") || /欧战|欧协/.test(m.fd||"")) {
+    final.pH -= 0.03; final.pA -= 0.03; final.pD += 0.06;
+    rk.push("欧战疲劳: 周中欧战后联赛胜率↓");
+  }
+
+  // 🔥 伤病量化
+  if (m.inj) {
+    let hInj = (m.inj.split("|")[0]||"").replace(/^主:\s*/, "");
+    let aInj = (m.inj.split("|")[1]||"").replace(/^客:\s*/, "");
+    if (/缺阵|伤缺|停赛|离队/.test(hInj) && !/无关|无关键/.test(hInj)) {
+      final.pH -= 0.03; final.pD += 0.02; rk.push("主队核心缺阵");
+    }
+    if (/缺阵|伤缺|停赛|离队/.test(aInj) && !/无关|无关键/.test(aInj)) {
+      final.pA -= 0.03; final.pD += 0.02; rk.push("客队核心缺阵");
+    }
+  }
+
   // 8. 归一化
   let tot = final.pH + final.pD + final.pA;
   final.pH /= tot; final.pD /= tot; final.pA /= tot;
@@ -449,7 +514,7 @@ function updateHeader() {
   let tot = h.reduce((s,x) => s + (x.t||0), 0);
   let ok = h.reduce((s,x) => s + (x.ok||0), 0);
   document.getElementById("headerMeta").textContent =
-    `${DB.updated||"--"} · 累计${tot}场 ✅${ok} 📈${tot?Math.round(ok/tot*100):0}%`;
+    `${DATA_SRC} · ${DB.updated||"--"} · ${tot}场✅${ok} 📈${tot?Math.round(ok/tot*100):0}%`;
 }
 
 function switchTab(page, el) {
@@ -638,44 +703,72 @@ function renderModel() {
 }
 
 // ═══════════════════════════════════════════
-//  初始化
+//  数据加载 (Fotmob直连 + data.json兜底)
 // ═══════════════════════════════════════════
+
+const OL = "https://api.openligadb.de";
+const OL_SRC = [["bl1/2026","德甲","🇩🇪"],["bl2/2026","德乙","🇩🇪"],["ucl/2026","欧冠","🏆"]];
+let DATA_SRC = "加载中...";
+
+async function loadData() {
+  // 1. data.json (GitHub Actions每3h自动更新)
+  try {
+    let r = await fetch("data.json?" + Date.now());
+    DB = await r.json();
+    DATA_SRC = "数据 " + (DB.updated||"--");
+  } catch(e) {
+    DATA_SRC = "加载失败";
+    if (!DB) DB = { today:{matches:[]}, yesterday:{results:[]}, history:[], rules:[], updated:"--" };
+  }
+  // 2. OpenLigaDB实时补充 (CORS友好)
+  let today = new Date().toISOString().slice(0,10);
+  let existing = new Set((DB.today.matches||[]).map(m => m.h+"|"+m.a));
+  for (let [path, lname, flag] of OL_SRC) {
+    try {
+      let r = await fetch(`${OL}/getmatchdata/${path}`);
+      if (!r.ok) continue;
+      let data = await r.json();
+      for (let m of data) {
+        let dt = (m.matchDateTime||"").slice(0,10);
+        if (dt !== today) continue;
+        let rs = m.matchResults||[];
+        if (rs.length > 0 && rs[0].resultName !== "-:-") continue;
+        let key = (m.team1||{}).teamName+"|"+(m.team2||{}).teamName;
+        if (existing.has(key)) continue;
+        DB.today.matches.push({
+          id: DB.today.matches.length+1, lg: `${flag} ${lname}`,
+          tm: m.matchDateTime.slice(11,16),
+          h: (m.team1||{}).teamName||"?", a: (m.team2||{}).teamName||"?",
+          hr: 0, ar: 0, odds: "待获取", h2h: "数据待补充",
+          inj: "无关键伤停", fm: "待获取", xp: "OpenLigaDB实时", _live: true
+        });
+        existing.add(key);
+      }
+    } catch(e) {}
+  }
+  if (DB.today.matches.length > 0) DB.today.matches.sort((a,b) => (a.tm||"99").localeCompare(b.tm||"99"));
+  RULES = DB.rules || [];
+  updateHeader();
+}
 
 (async function init() {
   await loadData();
   switchTab("today", document.querySelector(".tab"));
-
-  // 每10分钟自动刷新
   setInterval(async () => { await loadData(); }, 600000);
 })();
 
-async function loadData() {
-  try {
-    let resp = await fetch("data.json?" + Date.now());
-    DB = await resp.json();
-    RULES = DB.rules || [];
-  } catch(e) {
-    if (!DB) DB = { today: { matches: [] }, yesterday: { results: [] }, history: [], rules: [], updated: "加载失败" };
-  }
-  updateHeader();
-}
-
 async function refreshData() {
   let btn = document.getElementById("refreshBtn");
-  btn.classList.add("spin");
-  btn.textContent = "⏳ 刷新中...";
+  btn.classList.add("spin"); btn.textContent = "⏳ 刷新中...";
   await loadData();
-  // 刷新当前显示的tab内容
   let curTab = document.querySelector(".tab.on");
   if (curTab) {
-    let page = curTab.textContent.includes("今日") ? "today" :
-               curTab.textContent.includes("历史") ? "history" :
-               curTab.textContent.includes("规则") ? "rules" : "model";
-    switchTab(page, curTab);
+    let t = curTab.textContent;
+    switchTab(t.includes("今日")?"today":t.includes("历史")?"history":t.includes("规则")?"rules":"model", curTab);
   }
   btn.classList.remove("spin");
-  btn.textContent = "🔄 刷新";
-  setTimeout(() => { btn.textContent = "✅ 已更新"; setTimeout(() => { btn.textContent = "🔄 刷新"; }, 2000); }, 300);
+  btn.textContent = "✅ "+DATA_SRC;
+  setTimeout(() => { btn.textContent = "🔄 刷新"; }, 2500);
 }
 </script>
 </body>

@@ -1,0 +1,10 @@
+{
+  "summary": {
+    "realTotal": 0,
+    "realCorrect": 0,
+    "realAcc": null,
+    "leagueStats": {}
+  },
+  "model": "Poisson-Elo (纯模型, 无市场信号)",
+  "results": []
+}
