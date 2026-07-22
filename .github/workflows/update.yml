@@ -1,7 +1,7 @@
 name: 自动更新数据
 on:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '7 */3 * * *'
   workflow_dispatch:
 jobs:
   update:
@@ -16,6 +16,8 @@ jobs:
       - run: pip install requests
       - run: python fetch.py
         continue-on-error: true
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "📡 自动更新"
+          commit_message: "📡 自动更新 football-data.org"

@@ -133,7 +133,7 @@ body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;backgr
 
 <div class="header">
   <div class="header-inner">
-    <h1>⚽ 竞彩足球<em>智能研判</em><span class="model-badge">Poisson-Elo v2</span></h1>
+    <h1>⚽ 竞彩足球<em>智能研判</em><span class="model-badge">Poisson-Elo v2.1</span></h1>
     <div class="meta" id="headerMeta"></div>
     <button class="refresh-btn" onclick="refreshData()" id="refreshBtn">🔄 刷新</button>
   </div>
@@ -149,7 +149,7 @@ body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;backgr
 </div>
 
 <div class="main" id="mainContent"></div>
-<div class="footer">Poisson-Elo 混合模型 · Dixon-Coles 修正 · 市场赔率融合 · 数据源自 Fotmob · 仅供参考</div>
+<div class="footer">Poisson-Elo 混合模型 · Dixon-Coles 修正 · football-data.org API · 免费层无赔率 · 仅供参考</div>
 
 <script>
 // ═══════════════════════════════════════════
@@ -682,8 +682,10 @@ function renderRules() {
 
 function renderModel() {
   return `<div style="background:var(--card);border-radius:12px;padding:22px 26px;box-shadow:var(--shadow);border:1px solid var(--border);font-size:13px;line-height:2">
-    <h3 style="font-size:14px;color:var(--pri2);margin-bottom:14px">📐 Poisson-Elo 混合预测模型 v2</h3>
-    <p><b>理论基础:</b> 泊松进球模型 (Maher 1982) + Dixon-Coles 低比分修正 (1997) + Elo 球队评级系统</p>
+    <h3 style="font-size:14px;color:var(--pri2);margin-bottom:14px">📐 Poisson-Elo 混合预测模型 v2.1</h3>
+    <p><b>数据来源:</b> football-data.org API (免费层) → GitHub Actions 每3h自动抓取 → data.json</p>
+    <p><b>覆盖联赛:</b> 巴甲🇧🇷(BSA) · 欧冠🏆(CL) · 英超🏴󠁧󠁢󠁥󠁮󠁧󠁿(PL) · 德甲🇩🇪(BL1) · 意甲🇮🇹(SA) · 西甲🇪🇸(PD) · 法甲🇫🇷(FL1) · 荷甲🇳🇱(DED) · 葡超🇵🇹(PPL)</p>
+    <p style="color:var(--warn);font-size:10px">⚠️ 免费层无赔率数据，模型以纯Poisson-Elo模式运行（无市场融合），8月欧洲联赛开赛后数据自动补全</p>
     <p><b>预测流程:</b></p>
     <ol style="padding-left:20px;margin:6px 0">
       <li><b>排名→Elo:</b> 联赛排名转换为Elo评分 (1720−18×rank)，主场优势+120 Elo</li>
@@ -703,50 +705,22 @@ function renderModel() {
 }
 
 // ═══════════════════════════════════════════
-//  数据加载 (Fotmob直连 + data.json兜底)
+//  数据加载 · football-data.org API
+//  GitHub Actions每3h自动更新 data.json
 // ═══════════════════════════════════════════
 
-const OL = "https://api.openligadb.de";
-const OL_SRC = [["bl1/2026","德甲","🇩🇪"],["bl2/2026","德乙","🇩🇪"],["ucl/2026","欧冠","🏆"]];
 let DATA_SRC = "加载中...";
 
 async function loadData() {
-  // 1. data.json (GitHub Actions每3h自动更新)
   try {
     let r = await fetch("data.json?" + Date.now());
     DB = await r.json();
-    DATA_SRC = "数据 " + (DB.updated||"--");
+    let src = (DB.today.matches||[])[0];
+    DATA_SRC = (src&&src.xp) || "football-data.org " + (DB.updated||"--");
   } catch(e) {
     DATA_SRC = "加载失败";
     if (!DB) DB = { today:{matches:[]}, yesterday:{results:[]}, history:[], rules:[], updated:"--" };
   }
-  // 2. OpenLigaDB实时补充 (CORS友好)
-  let today = new Date().toISOString().slice(0,10);
-  let existing = new Set((DB.today.matches||[]).map(m => m.h+"|"+m.a));
-  for (let [path, lname, flag] of OL_SRC) {
-    try {
-      let r = await fetch(`${OL}/getmatchdata/${path}`);
-      if (!r.ok) continue;
-      let data = await r.json();
-      for (let m of data) {
-        let dt = (m.matchDateTime||"").slice(0,10);
-        if (dt !== today) continue;
-        let rs = m.matchResults||[];
-        if (rs.length > 0 && rs[0].resultName !== "-:-") continue;
-        let key = (m.team1||{}).teamName+"|"+(m.team2||{}).teamName;
-        if (existing.has(key)) continue;
-        DB.today.matches.push({
-          id: DB.today.matches.length+1, lg: `${flag} ${lname}`,
-          tm: m.matchDateTime.slice(11,16),
-          h: (m.team1||{}).teamName||"?", a: (m.team2||{}).teamName||"?",
-          hr: 0, ar: 0, odds: "待获取", h2h: "数据待补充",
-          inj: "无关键伤停", fm: "待获取", xp: "OpenLigaDB实时", _live: true
-        });
-        existing.add(key);
-      }
-    } catch(e) {}
-  }
-  if (DB.today.matches.length > 0) DB.today.matches.sort((a,b) => (a.tm||"99").localeCompare(b.tm||"99"));
   RULES = DB.rules || [];
   updateHeader();
 }
