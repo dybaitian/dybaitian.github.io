@@ -3,122 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>竞彩足球智能研判 · Poisson-Elo</title>
+<title>竞彩足球智能研判 · Poisson-Elo v3</title>
 <style>
+/* ═══════════ 主题变量 ═══════════ */
 :root {
   --bg: #f0f4f8; --card: #fff; --text: #1a202c; --t2: #64748b; --t3: #94a3b8;
   --pri: #1e3a5f; --pri2: #2c5282; --accent: #3b82f6;
   --success: #10b981; --warn: #f59e0b; --danger: #ef4444;
   --border: #e2e8f0; --hover: #f8fafc;
   --shadow: 0 1px 3px rgba(0,0,0,.06); --shadow-lg: 0 4px 16px rgba(0,0,0,.1);
+  --lottery-glow: #fbbf24;
+  --grad1: #0f172a; --grad2: #1e3a5f; --grad3: #1e40af;
+}
+body.dark {
+  --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --t2: #94a3b8; --t3: #64748b;
+  --pri: #38bdf8; --pri2: #60a5fa; --accent: #3b82f6;
+  --border: #334155; --hover: #1e293b;
+  --shadow: 0 1px 3px rgba(0,0,0,.3); --shadow-lg: 0 4px 16px rgba(0,0,0,.4);
+  --grad1: #020617; --grad2: #0f172a; --grad3: #1e3a5f;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;transition:background .3s,color .3s}
 
-/* Header */
-.header{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#1e40af 100%);color:#fff;padding:18px 24px;position:sticky;top:0;z-index:30;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+/* ═══════════ Header ═══════════ */
+.header{background:linear-gradient(135deg,var(--grad1),var(--grad2),var(--grad3));color:#fff;padding:14px 24px;position:sticky;top:0;z-index:30;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 .header-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .header h1{font-size:20px;font-weight:800;letter-spacing:-.5px}
 .header h1 em{font-style:normal;color:var(--warn)}
-.header .meta{font-size:11px;opacity:.7;display:flex;align-items:center;gap:10px}
-.refresh-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:4px 12px;border-radius:16px;cursor:pointer;font-size:10px;transition:.2s;white-space:nowrap}
+.header .meta{font-size:10px;opacity:.75;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.header .meta .chip{background:rgba(255,255,255,.12);padding:2px 10px;border-radius:10px;font-size:10px}
+.theme-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;padding:5px 12px;border-radius:16px;cursor:pointer;font-size:10px;transition:.2s}
+.theme-btn:hover{background:rgba(255,255,255,.25)}
+.refresh-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff;padding:4px 12px;border-radius:16px;cursor:pointer;font-size:10px;transition:.2s}
 .refresh-btn:hover{background:rgba(255,255,255,.25)}
 .refresh-btn.spin span{display:inline-block;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Tabs */
-.tabs{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:62px;z-index:29;display:flex;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+/* ═══════════ Tabs ═══════════ */
+.tabs{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:56px;z-index:29;display:flex;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.03)}
 .tabs-inner{max-width:1100px;display:flex;gap:0;overflow-x:auto;width:100%}
-.tab{padding:14px 28px;font-size:13px;cursor:pointer;color:var(--t2);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:.15s;user-select:none;font-weight:500}
+.tab{padding:12px 22px;font-size:12px;cursor:pointer;color:var(--t2);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:.15s;user-select:none;font-weight:500}
 .tab:hover{color:var(--accent);background:var(--hover)}
 .tab.on{color:var(--pri2);border-bottom-color:var(--accent);font-weight:700}
 
-/* Main */
+/* ═══════════ Main ═══════════ */
 .main{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
 
-/* Stats */
+/* ═══════════ Stats ═══════════ */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
-.stat-card{background:var(--card);border-radius:12px;padding:18px 16px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border);transition:.15s}
-.stat-card .val{font-size:28px;font-weight:800;letter-spacing:-1px}
-.stat-card .lbl{font-size:10px;color:var(--t2);margin-top:2px;text-transform:uppercase;letter-spacing:0.5px}
+.stat-card{background:var(--card);border-radius:12px;padding:16px;text-align:center;box-shadow:var(--shadow);border:1px solid var(--border);transition:.2s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.stat-card .icon{font-size:22px;margin-bottom:4px}
+.stat-card .val{font-size:26px;font-weight:800;letter-spacing:-1px}
+.stat-card .lbl{font-size:10px;color:var(--t2);margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
 
-/* Plan */
+/* ═══════════ Section Headers ═══════════ */
+.section-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;margin-top:4px}
+.section-header h3{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.section-header .badge{font-size:10px;padding:2px 10px;border-radius:10px;font-weight:600}
+.badge-lottery{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.badge-other{background:var(--hover);color:var(--t2);border:1px solid var(--border)}
+
+/* ═══════════ Collapse toggle ═══════════ */
+.collapse-toggle{cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--pri2);padding:8px 0;font-weight:600;transition:.2s}
+.collapse-toggle:hover{opacity:.8}
+.collapse-toggle .arrow{transition:transform .3s;display:inline-block}
+.collapse-toggle.open .arrow{transform:rotate(90deg)}
+.collapse-body{overflow:hidden;transition:max-height .4s ease}
+.collapse-body.hidden{max-height:0!important}
+
+/* ═══════════ Plan Box ═══════════ */
 .plan-box{background:linear-gradient(135deg,#fffbeb,#fff7ed);border:1.5px solid var(--warn);border-radius:12px;padding:16px 22px;margin-bottom:18px}
+body.dark .plan-box{background:linear-gradient(135deg,#292524,#1c1917);border-color:#92400e}
 .plan-box h3{font-size:14px;color:#92400e;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .plan-leg{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:12px}
 .plan-num{min-width:24px;height:24px;border-radius:50%;background:var(--warn);color:#fff;text-align:center;line-height:24px;font-size:11px;font-weight:800}
 .plan-note{font-size:10px;color:var(--t2);margin-top:8px;padding-top:8px;border-top:1px dotted #fde68a}
+.kelly-bar{height:4px;border-radius:2px;background:#fde68a;margin-top:4px;overflow:hidden}
+.kelly-fill{height:100%;background:var(--warn);border-radius:2px;transition:width .5s}
 
-/* Match grid */
-.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
-.match-card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);cursor:pointer;transition:.15s;position:relative}
+/* ═══════════ Match Cards ═══════════ */
+.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:14px}
+.match-card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);cursor:pointer;transition:.2s;position:relative}
 .match-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
-.match-card .accent{position:absolute;left:0;top:0;width:4px;height:100%}
+.match-card.lottery{border-color:var(--lottery-glow);box-shadow:0 0 0 1px var(--lottery-glow),var(--shadow)}
+.match-card .accent{position:absolute;left:0;top:0;width:4px;height:100%;border-radius:12px 0 0 12px}
 .match-card .accent.low{background:var(--success)}
 .match-card .accent.mid{background:var(--warn)}
 .match-card .accent.high{background:var(--danger)}
-.match-card .body{padding:18px 18px 18px 22px}
+.match-card .body{padding:16px 16px 16px 20px}
 
-.match-card .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.match-card .league{font-size:10px;font-weight:700;color:var(--pri2);background:#eff6ff;padding:3px 10px;border-radius:20px}
+.match-card .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:6px;flex-wrap:wrap}
+.match-card .league{font-size:10px;font-weight:700;color:var(--pri2);background:var(--hover);padding:3px 10px;border-radius:20px}
+.match-card .lottery-num{font-size:10px;font-weight:800;background:#fef3c7;color:#92400e;padding:2px 8px;border-radius:10px;border:1px solid #fcd34d}
 .match-card .time{font-size:10px;color:var(--t3)}
 
-.match-card .teams{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.match-card .team{font-weight:700;font-size:15px;flex:1}
-.match-card .team:last-child{text-align:right}
-.match-card .team .rank{font-size:10px;color:var(--t3);font-weight:400;margin-left:3px}
-.match-card .vs{color:var(--t3);font-size:11px;font-weight:400;padding:0 8px;flex-shrink:0}
+.match-card .teams{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px}
+.match-card .team{font-weight:700;font-size:15px;flex:1;display:flex;align-items:center;gap:6px}
+.match-card .team:last-child{text-align:right;justify-content:flex-end}
+.match-card .team .crest{width:22px;height:22px;border-radius:50%;object-fit:contain;background:var(--hover)}
+.match-card .team .rank{font-size:10px;color:var(--t3);font-weight:400;margin-left:2px}
+.match-card .vs{color:var(--t3);font-size:11px;font-weight:400;flex-shrink:0}
 
-.match-card .odds-row{font-size:10px;color:var(--t2);margin-bottom:14px;display:flex;gap:6px}
-.match-card .odds-row span{background:#f8fafc;padding:2px 8px;border-radius:4px;font-family:"SF Mono","Consolas",monospace}
+.match-card .odds-row{font-size:10px;color:var(--t2);margin-bottom:12px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.match-card .odds-row span{background:var(--hover);padding:2px 8px;border-radius:4px;font-family:"SF Mono","Consolas",monospace}
+.match-card .odds-row .hdp{color:#7c3aed;font-weight:600;font-size:9px}
 
-/* Probability bar */
+/* Prob bar */
 .prob-bar-wrap{margin-bottom:10px}
-.prob-bar{height:6px;border-radius:3px;display:flex;overflow:hidden;background:#f1f5f9}
+.prob-bar{height:6px;border-radius:3px;display:flex;overflow:hidden;background:var(--hover)}
 .prob-bar .h-seg{background:var(--accent);transition:width .3s}
 .prob-bar .d-seg{background:#cbd5e1;transition:width .3s}
 .prob-bar .a-seg{background:#f87171;transition:width .3s}
 .prob-labels{display:flex;justify-content:space-between;font-size:9.5px;color:var(--t2);margin-top:3px}
 
-/* Prediction row */
 .pred-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
 .pred{font-weight:800;font-size:14px;padding:4px 0}
 .pred.win{color:var(--success)}.pred.draw{color:var(--warn)}.pred.loss{color:var(--t3)}
 .stars{color:var(--warn);font-size:11px;letter-spacing:1px}
 .score-pred{font-size:10px;color:var(--t2);margin-top:2px}
 
-/* Expand detail */
-.detail{display:none;border-top:1px solid var(--border);margin-top:14px;padding-top:14px;padding-left:4px;font-size:11px;color:var(--t2);line-height:1.9}
+/* Detail panel */
+.detail{display:none;border-top:1px solid var(--border);margin-top:12px;padding-top:12px;padding-left:4px;font-size:11px;color:var(--t2);line-height:1.9}
 .detail.open{display:block}
-.detail .sec{margin-bottom:8px}
+.detail .sec{margin-bottom:6px}
 .detail .sec b{color:var(--text);display:block;margin-bottom:1px;font-size:11.5px}
 .detail .risks{background:#fef2f2;border:1px solid #fecaca;border-radius:6px;padding:8px 12px;margin-top:6px;color:var(--danger);font-size:10px}
 .detail .signals{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;margin-top:4px;color:#166534;font-size:10px}
+body.dark .detail .risks{background:#3b1a1a;border-color:#7f1d1d}
+body.dark .detail .signals{background:#1a3b2a;border-color:#166534}
 
-/* History */
+/* Poisson canvas */
+.poisson-chart{width:100%;height:80px;margin-top:6px;border-radius:6px;background:var(--hover)}
+
+/* ═══════════ Combo Optimizer ═══════════ */
+.combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:16px}
+.combo-card{background:var(--card);border-radius:10px;padding:14px 18px;border:1px solid var(--border);box-shadow:var(--shadow);transition:.2s}
+.combo-card.selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.combo-card .cb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.combo-card .cb-teams{font-size:12px;font-weight:600}
+.combo-card .cb-pick{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600;cursor:pointer}
+.combo-card .cb-pick.on{background:var(--accent);color:#fff}
+.combo-card .cb-pick.off{background:var(--hover);color:var(--t2)}
+.combo-result{background:var(--card);border-radius:12px;padding:18px 22px;border:2px solid var(--warn);box-shadow:var(--shadow-lg);margin-top:12px}
+.combo-result .cr-return{font-size:28px;font-weight:800;color:#92400e}
+
+/* ═══════════ History / Rules ═══════════ */
 .hist-table{width:100%;border-collapse:collapse;font-size:11px;background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border)}
-.hist-table th{background:#f8fafc;padding:10px 8px;text-align:left;font-weight:700;border-bottom:2px solid var(--border);color:var(--t2);font-size:10px}
+.hist-table th{background:var(--hover);padding:10px 8px;text-align:left;font-weight:700;border-bottom:2px solid var(--border);color:var(--t2);font-size:10px}
 .hist-table td{padding:9px 8px;border-bottom:1px solid var(--border)}
 .hist-table tr:hover td{background:var(--hover)}
-.lesson-card{padding:10px 14px;margin:6px 0;border-left:3px solid var(--pri2);background:var(--card);border-radius:0 8px 8px 0;font-size:11px;line-height:1.7;box-shadow:var(--shadow);border:1px solid var(--border);border-left:3px solid var(--pri2)}
-
-/* Rules */
+.lesson-card{padding:10px 14px;margin:6px 0;border-left:3px solid var(--pri2);background:var(--card);border-radius:0 8px 8px 0;font-size:11px;line-height:1.7;box-shadow:var(--shadow);border:1px solid var(--border)}
 .rule-group{margin-bottom:16px}
 .rule-group h4{font-size:12px;color:var(--pri2);margin-bottom:8px}
 .rule-table{width:100%;border-collapse:collapse;font-size:10px;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border)}
-.rule-table th{background:#f8fafc;padding:8px;text-align:left;font-weight:700;border-bottom:2px solid var(--border);color:var(--t2);font-size:9px}
+.rule-table th{background:var(--hover);padding:8px;text-align:left;font-weight:700;border-bottom:2px solid var(--border);color:var(--t2);font-size:9px}
 .rule-table td{padding:7px 8px;border-bottom:1px solid var(--border)}
 
-/* Empty state */
+/* ═══════════ Backtest Chart ═══════════ */
+.chart-wrap{background:var(--card);border-radius:12px;padding:18px 22px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:14px}
+.chart-wrap canvas{width:100%;max-height:300px}
+
+/* ═══════════ Empty / Footer ═══════════ */
 .empty{text-align:center;padding:60px 20px;color:var(--t2)}
 .empty .icon{font-size:48px;margin-bottom:12px}
 .empty p{font-size:13px}
 .empty .sub{font-size:11px;color:var(--t3);margin-top:4px}
-
-/* Footer */
 .footer{text-align:center;padding:20px;font-size:10px;color:var(--t3);border-top:1px solid var(--border);margin-top:20px}
-
-/* Model badge */
 .model-badge{display:inline-block;font-size:9px;background:#e0e7ff;color:#4338ca;padding:1px 6px;border-radius:3px;font-weight:600;margin-left:4px;vertical-align:middle}
 
 @media(max-width:640px){
@@ -126,6 +177,7 @@ body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;backgr
   .match-grid{grid-template-columns:1fr}
   .header h1{font-size:16px}
   .main{padding:12px 8px 30px}
+  .combo-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -133,8 +185,9 @@ body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;backgr
 
 <div class="header">
   <div class="header-inner">
-    <h1>⚽ 竞彩足球<em>智能研判</em><span class="model-badge">Poisson-Elo v2.1</span></h1>
+    <h1>⚽ 竞彩足球<em>智能研判</em><span class="model-badge">PoElo v3</span></h1>
     <div class="meta" id="headerMeta"></div>
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 暗色</button>
     <button class="refresh-btn" onclick="refreshData()" id="refreshBtn">🔄 刷新</button>
   </div>
 </div>
@@ -142,608 +195,490 @@ body{font-family:"Microsoft YaHei","PingFang SC",-apple-system,sans-serif;backgr
 <div class="tabs">
   <div class="tabs-inner">
     <a class="tab on" onclick="switchTab('today',this)">📅 今日预测</a>
+    <a class="tab" onclick="switchTab('combo',this)">🎯 串关优化</a>
     <a class="tab" onclick="switchTab('history',this)">📋 历史战绩</a>
+    <a class="tab" onclick="switchTab('backtest',this)">📈 模型回测</a>
     <a class="tab" onclick="switchTab('rules',this)">🧠 算法规则</a>
     <a class="tab" onclick="switchTab('model',this)">📐 模型说明</a>
   </div>
 </div>
 
 <div class="main" id="mainContent"></div>
-<div class="footer">Poisson-Elo 混合模型 · Dixon-Coles 修正 · football-data.org API · 免费层无赔率 · 仅供参考</div>
+<div class="footer">Poisson-Elo v3 · Dixon-Coles · football-data.org + 竞彩官方 · 仅供参考</div>
 
 <script>
 // ═══════════════════════════════════════════
-//  Poisson-Elo 混合预测模型 v2
-//  方法: Elo评级 → Poisson进球期望 → Dixon-Coles修正 → 市场赔率融合
+//  Poisson-Elo 混合预测模型 v3
+//  双源数据: football-data.org + 竞彩官方
 // ═══════════════════════════════════════════
 
-let DB = null, RULES = [];
+let DB = null, RULES = [], DATA_SRC = "加载中...";
+let selectedCombo = new Set();
 
-// ── 联赛参数 (场均进球, 主胜率, 平局率) ──
-const LG = {
-  "K1":   {avg:2.45, hw:0.43, dr:0.27},
-  "K2":   {avg:2.40, hw:0.41, dr:0.28},
-  "巴甲": {avg:2.30, hw:0.48, dr:0.26},
-  "欧冠": {avg:2.80, hw:0.46, dr:0.24},
-  "瑞超": {avg:2.65, hw:0.42, dr:0.26},
-  "芬超": {avg:2.60, hw:0.40, dr:0.28},
-  "_":    {avg:2.65, hw:0.44, dr:0.26}
+// ── 联赛参数 ──
+const LG_CFG = {
+  "K1":{avg:2.45,hw:0.43,dr:0.27},"巴甲":{avg:2.30,hw:0.48,dr:0.26},
+  "欧冠":{avg:2.80,hw:0.46,dr:0.24},"瑞超":{avg:2.65,hw:0.42,dr:0.26},
+  "芬超":{avg:2.60,hw:0.40,dr:0.28},"英超":{avg:2.75,hw:0.45,dr:0.25},
+  "德甲":{avg:3.05,hw:0.43,dr:0.24},"意甲":{avg:2.65,hw:0.41,dr:0.27},
+  "西甲":{avg:2.55,hw:0.47,dr:0.25},"法甲":{avg:2.70,hw:0.42,dr:0.27},
+  "荷甲":{avg:3.10,hw:0.45,dr:0.23},"葡超":{avg:2.55,hw:0.46,dr:0.25},
+  "美职":{avg:2.85,hw:0.49,dr:0.24},
+  "_":{avg:2.65,hw:0.44,dr:0.26}
 };
-function lgCfg(lg) {
-  for (let k in LG) if (lg && lg.includes(k)) return LG[k];
-  return LG._;
-}
+function lgCfg(lg){for(let k in LG_CFG)if(lg&&lg.includes(k))return LG_CFG[k];return LG_CFG._;}
 
-// ── Poisson PMF ──
-function dpois(k, lambda) {
-  if (lambda <= 0) return k === 0 ? 1 : 0;
-  if (k < 0 || k > 15) return 0;
-  let logP = -lambda + k * Math.log(lambda);
-  for (let i = 2; i <= k; i++) logP -= Math.log(i);
-  return Math.exp(logP);
-}
+// ── 队名显示: 中文优先 ──
+function cn(m, key){return m[key+"Cn"]||m[key]||"?";}
 
-// ── 排名→Elo ──
-function rankToElo(rank) {
-  if (!rank || rank <= 0) return 1500;
-  return 1720 - (rank - 1) * 18;
-}
-
-// ── 状态文本解析 → Elo调整 ──
-function formAdjust(fmText) {
-  if (!fmText || fmText === "?") return 0;
-  let adj = 0;
-  // 新格式 (fetch.py v5: "状态火爆(4胜)")
-  if (/状态火爆/.test(fmText)) adj += 30;
-  else if (/状态良好/.test(fmText)) adj += 15;
-  if (/状态低迷/.test(fmText)) adj -= 25;
-  else if (/状态下滑/.test(fmText)) adj -= 10;
-  if (/3连胜/.test(fmText)) adj += 15;
-  else if (/2连胜/.test(fmText)) adj += 8;
-  if (/3连败/.test(fmText)) adj -= 15;
-  else if (/2连败/.test(fmText)) adj -= 8;
-  if (/一胜难求/.test(fmText)) adj -= 20;
-  if (/平局率高/.test(fmText)) adj -= 5;
-  // 旧格式兼容 (手动数据: "近6场3胜1平2负,客场3连败")
-  if (adj === 0) {
-    let wm = fmText.match(/(\d+)胜/), lm = fmText.match(/(\d+)负/);
-    let w = wm ? parseInt(wm[1]) : 0, l = lm ? parseInt(lm[1]) : 0;
-    if (w >= 4) adj += 25; else if (w >= 3) adj += 12;
-    if (l >= 4) adj -= 25; else if (l >= 3) adj -= 15;
-    if (/连败/.test(fmText)) adj -= 10;
-    if (/连胜/.test(fmText)) adj += 10;
-  }
+// ── Poisson & 模型核心 (与v2相同，略) ──
+function dpois(k,lambda){if(lambda<=0)return k===0?1:0;if(k<0||k>15)return 0;let logP=-lambda+k*Math.log(lambda);for(let i=2;i<=k;i++)logP-=Math.log(i);return Math.exp(logP);}
+function rankToElo(rank){return rank&&rank>0?1720-(rank-1)*18:1500;}
+function formAdjust(fmText){
+  if(!fmText||fmText==="?")return 0;
+  let adj=0;
+  if(/状态火爆/.test(fmText))adj+=30;else if(/状态良好/.test(fmText))adj+=15;
+  if(/状态低迷/.test(fmText))adj-=25;else if(/状态下滑/.test(fmText))adj-=10;
+  if(/3连胜/.test(fmText))adj+=15;else if(/2连胜/.test(fmText))adj+=8;
+  if(/3连败/.test(fmText))adj-=15;else if(/2连败/.test(fmText))adj-=8;
+  if(/一胜难求/.test(fmText))adj-=20;
+  if(/平局率高/.test(fmText))adj-=5;
+  if(adj===0){let wm=fmText.match(/(\d+)胜/),lm=fmText.match(/(\d+)负/);let w=wm?parseInt(wm[1]):0,l=lm?parseInt(lm[1]):0;if(w>=4)adj+=25;else if(w>=3)adj+=12;if(l>=4)adj-=25;else if(l>=3)adj-=15;}
   return adj;
 }
-
-// ── H2H文本解析 → Elo调整 ──
-function h2hAdjust(h2hText, isHome) {
-  if (!h2hText) return {home:0, away:0};
-  let h = 0, a = 0;
-  if (/血脉压制/.test(h2hText)) {
-    let hn = h2hText.match(/(\S+)近\d+次(\d+)胜/);
-    if (hn) { if (isHome) h += 25; else a += 25; }
-  }
-  if (/占优/.test(h2hText)) {
-    let m = h2hText.match(/(\S+)占优/);
-    if (m) { if (isHome) h += 15; else a += 15; }
-  }
-  if (/0胜.*极端劣势/.test(h2hText)) {
-    if (isHome) h -= 20; else a -= 20;
-  }
-  if (/接近/.test(h2hText)) { h += 3; a += 3; }
-  // 旧格式兼容 (手动数据: "全北主场对大田近5次4胜1平")
-  if (h === 0 && a === 0) {
-    let wins = h2hText.match(/(\d+)胜/);
-    let winsN = wins ? parseInt(wins[1]) : 0;
-    if (winsN >= 4) { if (isHome) h += 15; else a += 15; }
-    if (/0胜/.test(h2hText)) { if (isHome) h -= 18; else a -= 18; }
-  }
-  return {home:h, away:a};
+function h2hAdjust(h2hText,isHome){
+  if(!h2hText)return{home:0,away:0};
+  let h=0,a=0;
+  if(/血脉压制/.test(h2hText)){let hn=h2hText.match(/(\S+)近\d+次(\d+)胜/);if(hn){if(isHome)h+=25;else a+=25;}}
+  if(/占优/.test(h2hText)){if(isHome)h+=15;else a+=15;}
+  if(/0胜.*极端劣势/.test(h2hText)){if(isHome)h-=20;else a-=20;}
+  if(h===0&&a===0){let wins=h2hText.match(/(\d+)胜/),winsN=wins?parseInt(wins[1]):0;if(winsN>=4){if(isHome)h+=15;else a+=15;}if(/0胜/.test(h2hText)){if(isHome)h-=18;else a-=18;}}
+  return{home:h,away:a};
+}
+function eloToLambda(homeElo,awayElo,cfg){
+  let ha=120,rawDiff=homeElo+ha-awayElo;
+  let winProb=1/(1+Math.pow(10,-rawDiff/400));
+  let goalShare=0.5+(winProb-0.5)*0.55;
+  return{home:Math.max(0.3,Math.min(4.5,cfg.avg*goalShare)),away:Math.max(0.2,Math.min(4.0,cfg.avg*(1-goalShare)))};
+}
+function scorelineMatrix(lambdaH,lambdaA){
+  const maxG=8,rho=-0.04;let hw=0,dr=0,aw=0,bestP=0,bestS="1-0",matrix=[];
+  for(let i=0;i<=maxG;i++){matrix[i]=[];for(let j=0;j<=maxG;j++){let p=dpois(i,lambdaH)*dpois(j,lambdaA);if(i===0&&j===0)p*=(1-lambdaH*lambdaA*rho);else if(i===0&&j===1)p*=(1+lambdaH*rho);else if(i===1&&j===0)p*=(1+lambdaA*rho);else if(i===1&&j===1)p*=(1-rho);matrix[i][j]=p;if(i>j)hw+=p;else if(i===j)dr+=p;else aw+=p;if(p>bestP){bestP=p;bestS=i+"-"+j;}}}
+  let total=hw+dr+aw;
+  return{pH:hw/total,pD:dr/total,pA:aw/total,bestScore:bestS,bestProb:bestP,lambdaH,lambdaA,matrix};
+}
+function oddsToProb(oddsStr){
+  if(!oddsStr||oddsStr==="待获取")return null;
+  try{let parts=oddsStr.split("/").map(Number);if(parts.length!==3||parts.some(isNaN))return null;let[w,d,l]=parts;let rawW=1/w,rawD=1/d,rawL=1/l,sum=rawW+rawD+rawL;return{pH:rawW/sum,pD:rawD/sum,pA:rawL/sum};}catch(e){return null;}
+}
+function blend(modelProb,marketProb){
+  if(!marketProb)return modelProb;
+  let w=0.50;return{pH:modelProb.pH*(1-w)+marketProb.pH*w,pD:modelProb.pD*(1-w)+marketProb.pD*w,pA:modelProb.pA*(1-w)+marketProb.pA*w};
 }
 
-// ── Elo → 期望进球 (Poisson λ) ──
-function eloToLambda(homeElo, awayElo, cfg) {
-  let ha = 120; // 主场优势 Elo (实战经验: 主场+10-15%胜率)
-  let rawDiff = homeElo + ha - awayElo;
-  // Elo预期胜率(含主场优势)
-  let winProb = 1 / (1 + Math.pow(10, -rawDiff / 400));
-  // 胜率衰减为进球份额 (胜率70%→进球60%, 胜率60%→进球55%)
-  let goalShare = 0.5 + (winProb - 0.5) * 0.55;
-  let lambH = cfg.avg * goalShare;
-  let lambA = cfg.avg * (1 - goalShare);
-  return {
-    home: Math.max(0.3, Math.min(4.5, lambH)),
-    away: Math.max(0.2, Math.min(4.0, lambA))
-  };
-}
-
-// ── 比分概率矩阵 + Dixon-Coles 修正 ──
-function scorelineMatrix(lambdaH, lambdaA) {
-  const maxG = 8, rho = -0.04;
-  let hw = 0, dr = 0, aw = 0;
-  let bestP = 0, bestS = "1-0";
-  let matrix = [];
-
-  for (let i = 0; i <= maxG; i++) {
-    matrix[i] = [];
-    for (let j = 0; j <= maxG; j++) {
-      let p = dpois(i, lambdaH) * dpois(j, lambdaA);
-      // Dixon-Coles 低比分依赖修正
-      if (i === 0 && j === 0) p *= (1 - lambdaH * lambdaA * rho);
-      else if (i === 0 && j === 1) p *= (1 + lambdaH * rho);
-      else if (i === 1 && j === 0) p *= (1 + lambdaA * rho);
-      else if (i === 1 && j === 1) p *= (1 - rho);
-
-      matrix[i][j] = p;
-      if (i > j) hw += p; else if (i === j) dr += p; else aw += p;
-      if (p > bestP) { bestP = p; bestS = i + "-" + j; }
-    }
-  }
+function predict(m){
+  let cfg=lgCfg(m.lg||""),rk=[],sg=[],bt=[];
+  let hElo=rankToElo(m.hr),aElo=rankToElo(m.ar);
+  let fmParts=(m.fm||"").split("|");
+  let hFm=fmParts[0]?fmParts[0].replace(/^主\([WDL\?]*\):\s*/,""):"";
+  let aFm=fmParts[1]?fmParts[1].replace(/^客\([WDL\?]*\):\s*/,""):"";
+  let hFmAdj=formAdjust(hFm),aFmAdj=formAdjust(aFm);
+  hElo+=hFmAdj;aElo+=aFmAdj;
+  if(hFmAdj>20)sg.push("主队状态极佳");if(hFmAdj<-15)rk.push("主队状态低迷");
+  if(aFmAdj>20)sg.push("客队状态极佳");if(aFmAdj<-15)rk.push("客队状态低迷");
+  let h2hAdj=h2hAdjust(m.h2h||"",true);
+  hElo+=h2hAdj.home;aElo+=h2hAdj.away;
+  if(h2hAdj.home>=20)sg.push("H2H历史占优");if(h2hAdj.home<=-15)rk.push("H2H历史劣势");
+  let lambdas=eloToLambda(hElo,aElo,cfg);
+  let modelProb=scorelineMatrix(lambdas.home,lambdas.away);
+  let marketProb=oddsToProb(m.odds);
+  let final=blend(modelProb,marketProb);
+  // 联赛微调
+  if(/欧冠|🏆/.test(m.lg||"")){final.pD+=0.04;final.pH-=0.02;final.pA-=0.02;bt.push("欧冠平局偏高");}
+  if(/瑞超|芬超/.test(m.lg||"")){final.pH+=0.03;final.pA-=0.03;bt.push("北欧主场加成");}
+  // 赔率规则
+  if(marketProb){try{let[wOdds,dOdds,lOdds]=m.odds.split("/").map(Number);if(dOdds>3.90){final.pD-=0.06;let share=final.pD/2;final.pH+=share;final.pA+=share;bt.push(`平赔${dOdds}>3.9→平局概率低`);}if(wOdds<1.30){final.pH-=0.04;final.pD+=0.02;final.pA+=0.02;rk.push(`极低赔率(${wOdds})大热必死`);bt.push("大热必死警告");}else if(lOdds<1.30){final.pA-=0.04;final.pD+=0.02;final.pH+=0.02;rk.push(`极低赔率(${lOdds})大热必死`);bt.push("大热必死警告");}}catch(e){}}
+  if(/平局率[5-9]\d%/.test(hFm)||/平局率[5-9]\d%/.test(aFm)){final.pD+=0.04;final.pH-=0.02;final.pA-=0.02;rk.push("伪不败:平局率高→降级");}
+  if(/客场.*0胜|客场虫|客场.*不胜/.test(aFm)){final.pA-=0.06;final.pH+=0.04;final.pD+=0.02;rk.push("客队客场虫");}
+  if(/主场.*连胜|主场.*堡垒|主场龙/.test(fmParts[0]||"")){final.pH+=0.04;final.pA-=0.04;sg.push("主队主场强势");}
+  // 战意
+  let lgSize=/巴甲/.test(m.lg||"")?20:16;
+  let hMotiv=0,aMotiv=0;
+  if(/欧冠|🏆/.test(m.lg||"")){hMotiv=5;aMotiv=5;}else{if(m.hr===1||m.hr===2){hMotiv=4;bt.push("主队争冠/冲欧战");}else if(m.hr>=lgSize-2){hMotiv=5;bt.push("主队保级战意强");}else if(m.hr>=lgSize-4){hMotiv=3;}if(m.ar===1||m.ar===2){aMotiv=4;bt.push("客队争冠/冲欧战");}else if(m.ar>=lgSize-2){aMotiv=5;bt.push("客队保级战意强");}let hMid=m.hr>5&&m.hr<lgSize-4,aMid=m.ar>5&&m.ar<lgSize-4;if(hMid&&aMid){final.pD+=0.03;sg.push("双方中游战意不足→平局↑");}if(hMotiv>=5&&aMotiv<=2){final.pH+=0.03;final.pA-=0.02;sg.push("主队保级搏命");}if(aMotiv>=5&&hMotiv<=2){final.pA+=0.03;final.pH-=0.02;sg.push("客队保级搏命");}}
+  if(m.hr<=3&&m.ar<=3){final.pD+=0.03;sg.push("强强对话平局率偏高");}
+  if(m.inj){let hInj=(m.inj.split("|")[0]||"").replace(/^主:\s*/,""),aInj=(m.inj.split("|")[1]||"").replace(/^客:\s*/,"");if(/缺阵|伤缺|停赛|离队/.test(hInj)&&!/无关|无关键/.test(hInj)){final.pH-=0.03;final.pD+=0.02;rk.push("主队核心缺阵");}if(/缺阵|伤缺|停赛|离队/.test(aInj)&&!/无关|无关键/.test(aInj)){final.pA-=0.03;final.pD+=0.02;rk.push("客队核心缺阵");}}
   // 归一化
-  let total = hw + dr + aw;
-  return {
-    pH: hw / total, pD: dr / total, pA: aw / total,
-    bestScore: bestS, bestProb: bestP,
-    lambdaH, lambdaA, matrix
-  };
-}
-
-// ── 赔率 → 市场隐含概率 (去水) ──
-function oddsToProb(oddsStr) {
-  if (!oddsStr || oddsStr === "待更新") return null;
-  try {
-    let parts = oddsStr.split("/").map(Number);
-    if (parts.length !== 3 || parts.some(isNaN)) return null;
-    let [w, d, l] = parts;
-    // 基本归一化去水
-    let rawW = 1/w, rawD = 1/d, rawL = 1/l;
-    let sum = rawW + rawD + rawL;
-    return { pH: rawW/sum, pD: rawD/sum, pA: rawL/sum };
-  } catch(e) { return null; }
-}
-
-// ── 集成融合 ──
-function blend(modelProb, marketProb) {
-  if (!marketProb) return modelProb;
-  // 市场赔率权重50%: 赔率是最强的单一预测信号
-  let w = 0.50;
-  return {
-    pH: modelProb.pH * (1-w) + marketProb.pH * w,
-    pD: modelProb.pD * (1-w) + marketProb.pD * w,
-    pA: modelProb.pA * (1-w) + marketProb.pA * w
-  };
-}
-
-// ── 主预测函数 ──
-function predict(m) {
-  let cfg = lgCfg(m.lg || "");
-  let rk = [], sg = [], bt = [];
-
-  // 1. Elo 评级
-  let hElo = rankToElo(m.hr), aElo = rankToElo(m.ar);
-
-  // 2. 状态调整
-  let fmParts = (m.fm || "").split("|");
-  let hFm = fmParts[0] ? fmParts[0].replace(/^主\([WDL\?]*\):\s*/, "") : "";
-  let aFm = fmParts[1] ? fmParts[1].replace(/^客\([WDL\?]*\):\s*/, "") : "";
-  let hFmAdj = formAdjust(hFm), aFmAdj = formAdjust(aFm);
-  hElo += hFmAdj; aElo += aFmAdj;
-  if (hFmAdj > 20) sg.push("主队状态极佳");
-  if (hFmAdj < -15) rk.push("主队状态低迷");
-  if (aFmAdj > 20) sg.push("客队状态极佳");
-  if (aFmAdj < -15) rk.push("客队状态低迷");
-
-  // 3. H2H调整
-  let h2hAdj = h2hAdjust(m.h2h || "", true);
-  hElo += h2hAdj.home; aElo += h2hAdj.away;
-  if (h2hAdj.home >= 20) sg.push("H2H历史占优");
-  if (h2hAdj.home <= -15) rk.push("H2H历史劣势");
-
-  // 4. Poisson模型
-  let lambdas = eloToLambda(hElo, aElo, cfg);
-  let modelProb = scorelineMatrix(lambdas.home, lambdas.away);
-
-  // 5. 市场信号
-  let marketProb = oddsToProb(m.odds);
-
-  // 6. 集成
-  let final = blend(modelProb, marketProb);
-
-  // 7. 联赛特征微调 + 实战博彩规则
-  // 欧冠淘汰赛: 平局概率上调
-  if (/欧冠|🏆/.test(m.lg || "")) {
-    final.pD += 0.04; final.pH -= 0.02; final.pA -= 0.02;
-    bt.push("欧冠: 平局率偏高, 主场加成");
-  }
-  // 北欧联赛主场
-  if (/瑞超|芬超/.test(m.lg || "")) {
-    final.pH += 0.03; final.pA -= 0.03;
-    bt.push("北欧主场加成(+3%)");
-  }
-  // 🔥 平赔>3.9规则 (实战铁律: 平赔>3.9平局很难打出)
-  if (marketProb) {
-    try {
-      let [wOdds, dOdds, lOdds] = m.odds.split("/").map(Number);
-      if (dOdds > 3.90) {
-        final.pD -= 0.06;
-        let share = final.pD / 2; final.pH += share; final.pA += share;
-        bt.push(`平赔${dOdds}>3.9→平局概率低`);
-      }
-      // 🔥 大热必死: 极低赔率自动加防冷
-      if (wOdds < 1.30) {
-        final.pH -= 0.04; final.pD += 0.02; final.pA += 0.02;
-        rk.push(`极低赔率(${wOdds})大热必死风险`);
-        bt.push("大热必死警告");
-      } else if (lOdds < 1.30) {
-        final.pA -= 0.04; final.pD += 0.02; final.pH += 0.02;
-        rk.push(`极低赔率(${lOdds})大热必死风险`);
-        bt.push("大热必死警告");
-      }
-    } catch(e) {}
-  }
-  // 伪不败检测
-  if (/平局率[5-9]\d%/.test(hFm) || /平局率[5-9]\d%/.test(aFm)) {
-    final.pD += 0.04; final.pH -= 0.02; final.pA -= 0.02;
-    rk.push("伪不败: 平局率高→降级");
-  }
-  // 客场虫 (更倾向主队)
-  if (/客场.*0胜|客场虫|客场.*不胜/.test(aFm)) {
-    final.pA -= 0.06; final.pH += 0.04; final.pD += 0.02;
-    rk.push("客队客场虫");
-  }
-  // 主场龙
-  if (/主场.*连胜|主场.*堡垒|主场龙/.test(fmParts[0]||"")) {
-    final.pH += 0.04; final.pA -= 0.04;
-    sg.push("主队主场强势");
-  }
-
-  // 🔥 战意/动机因子 (排名推断)
-  // 联赛规模估算: K1=12, 巴甲=20, 瑞超=16, 芬超=12, 欧冠=资格赛
-  let lgSize = /巴甲/.test(m.lg||"") ? 20 : /瑞超/.test(m.lg||"") ? 16 : 12;
-  let hMotiv = 0, aMotiv = 0;
-  if (/欧冠|🏆/.test(m.lg||"")) {
-    // 欧冠资格赛: 单场淘汰, 双方拼命, 弱队死守求平
-    hMotiv = 5; aMotiv = 5;
-    if (marketProb) {
-      try {
-        let [wOdds] = m.odds.split("/").map(Number);
-        if (wOdds < 1.70) { final.pD += 0.03; bt.push("欧冠资格赛: 强队防平, 弱队死守"); }
-      } catch(e) {}
-    }
-  } else {
-    // 联赛战意: 排名位置决定动机
-    if (m.hr === 1 || m.hr === 2) { hMotiv = 4; bt.push("主队争冠/冲欧战"); }
-    else if (m.hr >= lgSize - 2) { hMotiv = 5; bt.push("主队保级战意强"); }
-    else if (m.hr >= lgSize - 4) { hMotiv = 3; bt.push("主队保级压力"); }
-    else if (m.hr <= 5) { hMotiv = 2; }
-
-    if (m.ar === 1 || m.ar === 2) { aMotiv = 4; bt.push("客队争冠/冲欧战"); }
-    else if (m.ar >= lgSize - 2) { aMotiv = 5; bt.push("客队保级战意强"); }
-    else if (m.ar >= lgSize - 4) { aMotiv = 3; bt.push("客队保级压力"); }
-    else if (m.ar <= 5) { aMotiv = 2; }
-
-    // 中游无欲无求 → 平局概率上升
-    let hMid = m.hr > 5 && m.hr < lgSize - 4;
-    let aMid = m.ar > 5 && m.ar < lgSize - 4;
-    if (hMid && aMid) { final.pD += 0.03; sg.push("双方中游战意不足→平局↑"); }
-    else if (hMid && !aMid && aMotiv >= 3) { final.pA += 0.03; final.pH -= 0.03; sg.push("客队战意远强于主队"); }
-    else if (aMid && !hMid && hMotiv >= 3) { final.pH += 0.03; final.pA -= 0.03; sg.push("主队战意远强于客队"); }
-    // 保级队打强队的特殊逻辑: 保级队主场拼命
-    if (hMotiv >= 5 && aMotiv <= 2) { final.pH += 0.03; final.pA -= 0.02; final.pD += 0.01; sg.push("主队保级搏命, 主场加成"); }
-    if (aMotiv >= 5 && hMotiv <= 2) { final.pA += 0.03; final.pH -= 0.02; final.pD += 0.01; sg.push("客队保级搏命"); }
-    // 争冠强队打保级队: 强队可能被拖入苦战
-    if ((hMotiv >= 4 && aMotiv >= 5) || (hMotiv >= 5 && aMotiv >= 4)) { final.pD += 0.04; sg.push("战意对冲, 平局概率↑"); }
-  }
-
-  // 🔥 赛季阶段 (月份推断)
-  let mon = new Date().getMonth() + 1;
-  if (mon >= 3 && mon <= 4) { final.pD += 0.02; bt.push("赛季开局, 冷门偏多"); }
-  else if (mon >= 9 && mon <= 10) { final.pD -= 0.02; bt.push("赛季末段, 战意分化"); }
-
-  // 🔥 强强/弱弱对话
-  if (m.hr <= 3 && m.ar <= 3) { final.pD += 0.03; sg.push("强强对话, 平局率偏高"); }
-  if (m.hr >= lgSize-2 && m.ar >= lgSize-2 && m.hr > 0) { final.pD += 0.02; rk.push("弱弱对话, 不确定性高"); }
-
-  // 🔥 欧战疲劳
-  if (/欧战|欧协|欧联/.test(m.fm||"") || /欧战|欧协/.test(m.fd||"")) {
-    final.pH -= 0.03; final.pA -= 0.03; final.pD += 0.06;
-    rk.push("欧战疲劳: 周中欧战后联赛胜率↓");
-  }
-
-  // 🔥 伤病量化
-  if (m.inj) {
-    let hInj = (m.inj.split("|")[0]||"").replace(/^主:\s*/, "");
-    let aInj = (m.inj.split("|")[1]||"").replace(/^客:\s*/, "");
-    if (/缺阵|伤缺|停赛|离队/.test(hInj) && !/无关|无关键/.test(hInj)) {
-      final.pH -= 0.03; final.pD += 0.02; rk.push("主队核心缺阵");
-    }
-    if (/缺阵|伤缺|停赛|离队/.test(aInj) && !/无关|无关键/.test(aInj)) {
-      final.pA -= 0.03; final.pD += 0.02; rk.push("客队核心缺阵");
-    }
-  }
-
-  // 8. 归一化
-  let tot = final.pH + final.pD + final.pA;
-  final.pH /= tot; final.pD /= tot; final.pA /= tot;
-
-  // 9. 解读
-  let pH = Math.round(final.pH * 100), pD = Math.round(final.pD * 100), pA = Math.round(final.pA * 100);
-  // 确保加起来=100
-  let adj = 100 - pH - pD - pA;
-  let maxK = pH >= pD && pH >= pA ? "pH" : (pD >= pA ? "pD" : "pA");
-  if (maxK === "pH") pH += adj; else if (maxK === "pD") pD += adj; else pA += adj;
-
-  let dir, cls, stars;
-  // 阈值校准: 主/客胜54%即可推荐, 平局需>42%才单推, 差距<12%才防平
-  if (pH >= 54) { dir = "主胜"; cls = "win"; stars = pH >= 72 ? 5 : pH >= 63 ? 4 : 3; }
-  else if (pA >= 54) { dir = "客胜"; cls = "win"; stars = pA >= 72 ? 5 : pA >= 63 ? 4 : 3; }
-  else if (pD >= 42) { dir = "平局/双选"; cls = "draw"; stars = 2; }
-  else if (pH >= pA + 12) { dir = "主胜(防平)"; cls = "draw"; stars = 3; }
-  else if (pA >= pH + 12) { dir = "客胜(防平)"; cls = "draw"; stars = 3; }
-  else { dir = "平局优先"; cls = "draw"; stars = 2; }
-
-  let riskLevel = rk.length >= 3 ? "high" : rk.length >= 1 ? "mid" : "low";
-
-  // 10. 进球数预测
-  let totLambda = lambdas.home + lambdas.away;
-  let p0 = dpois(0, totLambda), p1 = dpois(1, totLambda), p2 = dpois(2, totLambda);
-  let over25 = Math.round((1 - p0 - p1 - p2) * 100);
-  let under25 = 100 - over25;
-  let goalTip = over25 >= 55 ? `大2.5球(${over25}%)` : over25 <= 45 ? `小2.5球(${under25}%)` : `进球数均衡`;
-
-  return {
-    pH, pD, pA, dir, cls, stars,
-    score: modelProb.bestScore,
-    lambdaH: lambdas.home.toFixed(2),
-    lambdaA: lambdas.away.toFixed(2),
-    totLambda: totLambda.toFixed(2),
-    over25, goalTip,
-    hElo: Math.round(hElo), aElo: Math.round(aElo),
-    risks: rk, signals: sg, bets: bt,
-    riskLevel, hasOdds: !!marketProb
-  };
+  let tot=final.pH+final.pD+final.pA;final.pH/=tot;final.pD/=tot;final.pA/=tot;
+  let pH=Math.round(final.pH*100),pD=Math.round(final.pD*100),pA=Math.round(final.pA*100);
+  let adj=100-pH-pD-pA,maxK=pH>=pD&&pH>=pA?"pH":(pD>=pA?"pD":"pA");
+  if(maxK==="pH")pH+=adj;else if(maxK==="pD")pD+=adj;else pA+=adj;
+  let dir,cls,stars;
+  if(pH>=54){dir="主胜";cls="win";stars=pH>=72?5:pH>=63?4:3;}
+  else if(pA>=54){dir="客胜";cls="win";stars=pA>=72?5:pA>=63?4:3;}
+  else if(pD>=42){dir="平局/双选";cls="draw";stars=2;}
+  else if(pH>=pA+12){dir="主胜(防平)";cls="draw";stars=3;}
+  else if(pA>=pH+12){dir="客胜(防平)";cls="draw";stars=3;}
+  else{dir="平局优先";cls="draw";stars=2;}
+  let riskLevel=rk.length>=3?"high":rk.length>=1?"mid":"low";
+  let totLambda=lambdas.home+lambdas.away;
+  let over25=Math.round((1-dpois(0,totLambda)-dpois(1,totLambda)-dpois(2,totLambda))*100);
+  let goalTip=over25>=55?`大2.5球(${over25}%)`:over25<=45?`小2.5球(${100-over25}%)`:`进球均衡`;
+  return{pH,pD,pA,dir,cls,stars,score:modelProb.bestScore,lambdaH:lambdas.home.toFixed(2),lambdaA:lambdas.away.toFixed(2),totLambda:totLambda.toFixed(2),over25,goalTip,hElo:Math.round(hElo),aElo:Math.round(aElo),risks:rk,signals:sg,bets:bt,riskLevel,hasOdds:!!marketProb,matrix:modelProb.matrix};
 }
 
 // ═══════════════════════════════════════════
 //  UI 渲染
 // ═══════════════════════════════════════════
 
-function updateHeader() {
-  let h = DB.history || [];
-  let tot = h.reduce((s,x) => s + (x.t||0), 0);
-  let ok = h.reduce((s,x) => s + (x.ok||0), 0);
-  document.getElementById("headerMeta").textContent =
-    `${DATA_SRC} · ${DB.updated||"--"} · ${tot}场✅${ok} 📈${tot?Math.round(ok/tot*100):0}%`;
+function updateHeader(){
+  let h=DB.history||[],tot=h.reduce((s,x)=>s+(x.t||0),0),ok=h.reduce((s,x)=>s+(x.ok||0),0);
+  document.getElementById("headerMeta").innerHTML=`<span class="chip">${DATA_SRC}</span><span class="chip">${DB.updated||"--"}</span><span class="chip">${tot}场✅${ok} 📈${tot?Math.round(ok/tot*100):0}%</span>`;
 }
 
-function switchTab(page, el) {
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("on"));
-  if (el) el.classList.add("on");
-  let html = "";
-  if (page === "today") html = renderToday();
-  else if (page === "history") html = renderHistory();
-  else if (page === "rules") html = renderRules();
-  else if (page === "model") html = renderModel();
-  document.getElementById("mainContent").innerHTML = html;
+function switchTab(page,el){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("on"));
+  if(el)el.classList.add("on");
+  let html="";
+  if(page==="today")html=renderToday();
+  else if(page==="combo")html=renderCombo();
+  else if(page==="history")html=renderHistory();
+  else if(page==="backtest")html=renderBacktest();
+  else if(page==="rules")html=renderRules();
+  else if(page==="model")html=renderModel();
+  document.getElementById("mainContent").innerHTML=html;
+  if(page==="today")renderPoissonCharts();
+  if(page==="backtest")renderBacktestChart();
 }
 
-function renderToday() {
-  let ms = ((DB||{}).today||{}).matches||[];
-  let h = DB.history || [];
-  let tot = h.reduce((s,x) => s + (x.t||0), 0);
-  let ok = h.reduce((s,x) => s + (x.ok||0), 0);
+function renderToday(){
+  let ms=((DB||{}).today||{}).matches||[];
+  let h=DB.history||[],tot=h.reduce((s,x)=>s+(x.t||0),0),ok=h.reduce((s,x)=>s+(x.ok||0),0);
+  if(!ms.length)return`<div class="empty"><div class="icon">📭</div><p>暂无今日比赛数据</p><div class="sub">每3h自动更新 · ${DB.updated||"--"}</div></div>`;
 
-  if (!ms.length) {
-    return `<div class="empty"><div class="icon">📭</div><p>暂无今日比赛数据</p><div class="sub">数据每3小时自动更新 · ${DB.updated||"--"}</div></div>`;
-  }
+  let preds=ms.map(m=>predict(m));
+  let lottery=ms.filter((m,i)=>m.isLottery);
+  let nonLottery=ms.filter((m,i)=>!m.isLottery);
 
-  // 为每场比赛运行模型
-  let predictions = ms.map(m => predict(m));
+  // 2串1推荐 (低中风险+高置信度)
+  let safe=preds.map((p,i)=>({p,i,m:ms[i]})).filter(x=>x.p.riskLevel!=="high"&&(x.p.pH>=55||x.p.pA>=55));
+  let planLegs=safe.slice(0,2);
 
-  // 低/中风险场次(用于2串1)
-  let safe = predictions.filter((p,i) =>
-    (p.riskLevel === "low" || p.riskLevel === "mid") &&
-    (p.pH >= 55 || p.pA >= 55)
-  );
-  let planLegs = safe.slice(0, 2);
-
-  let html = `
+  let html=`
   <div class="stats">
-    <div class="stat-card"><div class="val" style="color:#1e40af">${tot}</div><div class="lbl">累计研判</div></div>
-    <div class="stat-card"><div class="val" style="color:#64748b">${ms.length}</div><div class="lbl">今日场次</div></div>
-    <div class="stat-card"><div class="val" style="color:#${ok/tot>=.55?'10b981':'f59e0b'}">${tot?Math.round(ok/tot*100)+'%':'--'}</div><div class="lbl">累计准确率</div></div>
-    <div class="stat-card"><div class="val" style="color:#7c3aed">${RULES.length||25}</div><div class="lbl">算法规则</div></div>
+    <div class="stat-card"><div class="icon">📊</div><div class="val" style="color:#3b82f6">${tot}</div><div class="lbl">累计研判</div></div>
+    <div class="stat-card"><div class="icon">📅</div><div class="val" style="color:#64748b">${ms.length}</div><div class="lbl">今日场次</div></div>
+    <div class="stat-card"><div class="icon">🎯</div><div class="val" style="color:${tot&&ok/tot>=.55?'#10b981':'#f59e0b'}">${tot?Math.round(ok/tot*100)+'%':'--'}</div><div class="lbl">累计准确率</div></div>
+    <div class="stat-card"><div class="icon">🏆</div><div class="val" style="color:#f59e0b">${lottery.length}</div><div class="lbl">竞彩开售</div></div>
   </div>`;
 
   // 2串1推荐
-  if (planLegs.length >= 2) {
-    html += `<div class="plan-box">
+  if(planLegs.length>=2){
+    let mult=1;planLegs.forEach(x=>{let ods=x.m.odds.split("/");let pick=x.p.pH>=x.p.pA?ods[0]:ods[2];if(!isNaN(parseFloat(pick)))mult*=parseFloat(pick);});
+    mult=Math.round(mult*100)/100;
+    html+=`<div class="plan-box">
       <h3>🥇 精选2串1</h3>
-      ${planLegs.map((p,i) => {
-        let m = ms[predictions.indexOf(p)];
-        return `<div class="plan-leg"><span class="plan-num">${i+1}</span><b>${m.h} VS ${m.a}</b> → ${p.dir} (${Math.max(p.pH,p.pA)}%)</div>`;
-      }).join("")}
-      <div class="plan-note">自动筛选低风险+高置信度场次，剔除预警比赛</div>
+      ${planLegs.map((x,i)=>{let pp=x.p;return`<div class="plan-leg"><span class="plan-num">${i+1}</span><b>${cn(x.m,"h")} VS ${cn(x.m,"a")}</b> → ${pp.dir} (${Math.max(pp.pH,pp.pA)}%)</div>`;}).join("")}
+      <div class="plan-note">${planLegs[0].m.isLottery&&planLegs[1].m.isLottery?`💰 参考回报: ${mult}倍`:'⚠️ 部分场次无赔率数据'} · 自动筛选低β+高置信度</div>
     </div>`;
   }
 
-  // 比赛卡片
-  html += `<div class="match-grid">`;
-  ms.forEach((m, i) => {
-    let o = predictions[i];
-    let riskLabel = o.riskLevel === "high" ? "⚠️高风险" : o.riskLevel === "mid" ? "⚡注意" : "✅低风险";
+  // 竞彩开售比赛
+  if(lottery.length>0){
+    html+=`<div class="section-header"><h3>🎫 竞彩开售 <span class="badge badge-lottery">${lottery.length}场</span></h3></div>`;
+    html+=`<div class="match-grid">`;
+    lottery.forEach((m,i)=>{html+=renderMatchCard(m,preds[ms.indexOf(m)]);});
+    html+=`</div>`;
+  }
 
-    html += `
-    <div class="match-card" onclick="this.querySelector('.detail').classList.toggle('open')">
-      <div class="accent ${o.riskLevel}"></div>
-      <div class="body">
-        <div class="top-row">
-          <span class="league">${m.lg||""}</span>
-          <span class="time">${m.tm||""} · ${riskLabel}</span>
-        </div>
-        <div class="teams">
-          <span class="team">${m.h||"?"}<span class="rank">#${m.hr||"--"}</span></span>
-          <span class="vs">VS</span>
-          <span class="team">${m.a||"?"}<span class="rank">#${m.ar||"--"}</span></span>
-        </div>
-        <div class="odds-row">
-          <span>主${(m.odds||"?").split("/")[0]||"?"}</span>
-          <span>平${(m.odds||"?").split("/")[1]||"?"}</span>
-          <span>客${(m.odds||"?").split("/")[2]||"?"}</span>
-          ${o.hasOdds ? '<span style="color:#10b981">●市场</span>' : '<span style="color:#f59e0b">○纯模型</span>'}
-        </div>
-        <div class="prob-bar-wrap">
-          <div class="prob-bar">
-            <div class="h-seg" style="width:${o.pH}%"></div>
-            <div class="d-seg" style="width:${o.pD}%"></div>
-            <div class="a-seg" style="width:${o.pA}%"></div>
-          </div>
-          <div class="prob-labels"><span>主${o.pH}%</span><span>平${o.pD}%</span><span>客${o.pA}%</span></div>
-        </div>
-        <div class="pred-row">
-          <span class="pred ${o.cls}">${o.dir}</span>
-          <span class="stars">${"★".repeat(o.stars)}${"☆".repeat(5-o.stars)}</span>
-        </div>
-        <div class="score-pred">🎯 ${o.score} · ⚽ 期望${o.totLambda}球 · ${o.goalTip} · Elo ${o.hElo}/${o.aElo}</div>
-        <div class="detail">
-          <div class="sec"><b>📊 关键信号</b>${o.signals.length ? o.signals.join(" · ") : "无显著信号"}</div>
-          <div class="sec"><b>📋 H2H</b>${m.h2h||"--"}</div>
-          <div class="sec"><b>🏥 伤停</b>${m.inj||"--"}</div>
-          <div class="sec"><b>📈 近期状态</b>${m.fm||"--"}</div>
-          <div class="sec"><b>💬 市场共识</b>${m.xp||"--"}</div>
-          ${o.bets.length ? `<div class="signals">📐 模型洞察: ${o.bets.join(" · ")}</div>` : ""}
-          ${o.risks.length ? `<div class="risks">⚠️ 风险提示: ${o.risks.join(" · ")}</div>` : ""}
-        </div>
+  // 其他比赛(可折叠)
+  if(nonLottery.length>0){
+    let cid="otherMatches";
+    html+=`<div class="section-header"><h3>📋 其他比赛 <span class="badge badge-other">${nonLottery.length}场</span></h3></div>`;
+    html+=`<div class="collapse-toggle open" onclick="toggleCollapse('${cid}',this)"><span class="arrow">▶</span> 展开/收起</div>`;
+    html+=`<div class="collapse-body" id="${cid}" style="max-height:9999px"><div class="match-grid">`;
+    nonLottery.forEach((m,i)=>{html+=renderMatchCard(m,preds[ms.indexOf(m)]);});
+    html+=`</div></div>`;
+  }
+  return html;
+}
+
+function renderMatchCard(m,o){
+  let riskLabel=o.riskLevel==="high"?"⚠️高风险":o.riskLevel==="mid"?"⚡注意":"✅低风险";
+  let lotteryBadge=m.isLottery?`<span class="lottery-num">🎫${m.matchNum}</span>`:"";
+  let oddsHtml="";
+  if(m.odds&&m.odds!=="待获取"){
+    let parts=m.odds.split("/");
+    oddsHtml=parts.map((v,i)=>`<span>${["主","平","客"][i]}${v}</span>`).join("");
+    if(m.handicap){let gl=parseFloat(m.handicap);oddsHtml+=`<span class="hdp">让${gl>0?"+"+gl:gl}</span>`;}
+    if(m.odds_hhad)oddsHtml+=`<span style="font-size:9px;color:var(--t3)">让球${m.odds_hhad}</span>`;
+  }else{oddsHtml=`<span>赔率待获取</span>`;}
+
+  return`
+  <div class="match-card${m.isLottery?' lottery':''}" onclick="this.querySelector('.detail').classList.toggle('open')">
+    <div class="accent ${o.riskLevel}"></div>
+    <div class="body">
+      <div class="top-row">
+        <span class="league">${m.lg||""}</span>
+        ${lotteryBadge}
+        <span class="time">${m.tm||""} · ${riskLabel}</span>
       </div>
+      <div class="teams">
+        <span class="team"><img class="crest" src="${m.hCrest||''}" onerror="this.style.display='none'" alt="">${cn(m,"h")}<span class="rank">#${m.hr||"--"}</span></span>
+        <span class="vs">VS</span>
+        <span class="team">${cn(m,"a")}<span class="rank">#${m.ar||"--"}</span><img class="crest" src="${m.aCrest||''}" onerror="this.style.display='none'" alt=""></span>
+      </div>
+      <div class="odds-row">${oddsHtml}${o.hasOdds?'<span style="color:#10b981">●市场</span>':'<span style="color:#f59e0b">○纯模型</span>'}</div>
+      <div class="prob-bar-wrap">
+        <div class="prob-bar"><div class="h-seg" style="width:${o.pH}%"></div><div class="d-seg" style="width:${o.pD}%"></div><div class="a-seg" style="width:${o.pA}%"></div></div>
+        <div class="prob-labels"><span>主${o.pH}%</span><span>平${o.pD}%</span><span>客${o.pA}%</span></div>
+      </div>
+      <div class="pred-row"><span class="pred ${o.cls}">${o.dir}</span><span class="stars">${"★".repeat(o.stars)}${"☆".repeat(5-o.stars)}</span></div>
+      <div class="score-pred">🎯 ${o.score} · ⚽ ${o.totLambda}球 · ${o.goalTip} · Elo ${o.hElo}/${o.aElo}</div>
+      <canvas class="poisson-chart" id="pc-${m.id}" data-lh="${o.lambdaH}" data-la="${o.lambdaA}"></canvas>
+      <div class="detail">
+        <div class="sec"><b>📊 关键信号</b>${o.signals.length?o.signals.join(" · "):"无显著信号"}</div>
+        <div class="sec"><b>📋 H2H</b>${m.h2h||"--"}</div>
+        <div class="sec"><b>🏥 伤停</b>${m.inj||"--"}</div>
+        <div class="sec"><b>📈 近期状态</b>${m.fm||"--"}</div>
+        <div class="sec"><b>💬 数据源</b>${m.xp||"--"}${m.isLottery?" + 竞彩官方":""}</div>
+        ${o.bets.length?`<div class="signals">📐 模型洞察: ${o.bets.join(" · ")}</div>`:""}
+        ${o.risks.length?`<div class="risks">⚠️ 风险提示: ${o.risks.join(" · ")}</div>`:""}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderPoissonCharts(){
+  document.querySelectorAll(".poisson-chart").forEach(canvas=>{
+    let lh=parseFloat(canvas.dataset.lh)||1;
+    let la=parseFloat(canvas.dataset.la)||1;
+    drawPoisson(canvas,lh,la);
+  });
+}
+
+function drawPoisson(canvas,lh,la){
+  let ctx=canvas.getContext("2d");
+  let W=canvas.parentElement.clientWidth-36,H=80,dpr=window.devicePixelRatio||1;
+  canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+"px";canvas.style.height=H+"px";
+  ctx.scale(dpr,dpr);
+  let maxG=8,homePts=[],awayPts=[],maxP=0;
+  for(let i=0;i<=maxG;i++){homePts[i]=dpois(i,lh);awayPts[i]=dpois(i,la);maxP=Math.max(maxP,homePts[i],awayPts[i]);}
+  let pad={t:8,r:8,b:16,l:30},pw=W-pad.l-pad.r,ph=H-pad.t-pad.b;
+  // Axes
+  ctx.strokeStyle=getComputedStyle(document.body).getPropertyValue("--border").trim()||"#e2e8f0";
+  ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+ph);ctx.lineTo(pad.l+pw,pad.t+ph);ctx.stroke();
+  // Y labels
+  ctx.fillStyle=getComputedStyle(document.body).getPropertyValue("--t3").trim()||"#94a3b8";
+  ctx.font="8px sans-serif";ctx.textAlign="right";
+  for(let i=0;i<=3;i++){let y=pad.t+ph*(1-i/3),v=(maxP*i/3).toFixed(2);ctx.fillText(v,pad.l-3,y+3);}
+  // X labels
+  ctx.textAlign="center";
+  for(let i=0;i<=maxG;i++){let x=pad.l+pw*i/maxG;ctx.fillText(i,x,pad.t+ph+12);}
+  // Home curve
+  ctx.strokeStyle="#3b82f6";ctx.lineWidth=2;ctx.beginPath();
+  for(let i=0;i<=maxG;i++){let x=pad.l+pw*i/maxG,y=pad.t+ph*(1-homePts[i]/maxP);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();
+  // Away curve
+  ctx.strokeStyle="#f87171";ctx.lineWidth=2;ctx.beginPath();
+  for(let i=0;i<=maxG;i++){let x=pad.l+pw*i/maxG,y=pad.t+ph*(1-awayPts[i]/maxP);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);}ctx.stroke();
+  // Legend
+  ctx.fillStyle="#3b82f6";ctx.fillRect(pad.l+pw-80,pad.t,10,3);
+  ctx.fillStyle=getComputedStyle(document.body).getPropertyValue("--text").trim()||"#1a202c";
+  ctx.font="9px sans-serif";ctx.textAlign="left";ctx.fillText("主队进球分布",pad.l+pw-67,pad.t+4);
+  ctx.fillStyle="#f87171";ctx.fillRect(pad.l+pw-80,pad.t+12,10,3);
+  ctx.fillText("客队进球分布",pad.l+pw-67,pad.t+16);
+}
+
+// ═══════════════ Combo Optimizer ═══════════
+function renderCombo(){
+  let ms=((DB||{}).today||{}).matches||[];
+  if(!ms.length)return`<div class="empty"><div class="icon">🎯</div><p>暂无比赛数据</p></div>`;
+  let preds=ms.map(m=>predict(m));
+  let html=`<h3 style="font-size:14px;color:var(--pri2);margin-bottom:12px">🎯 串关优化器 <span style="font-size:10px;font-weight:400;color:var(--t2)">点击选择2-4场 → 自动算最佳组合</span></h3>`;
+  html+=`<div class="combo-grid">`;
+  ms.forEach((m,i)=>{
+    let o=preds[i],pick=o.pH>=o.pA?"主胜":o.pA>=o.pH?"客胜":"平局";
+    let oddsStr=m.odds!=="待获取"?m.odds.split("/"):null;
+    let pickOdds=oddsStr?(o.pH>=o.pA?oddsStr[0]:o.pA>=o.pH?oddsStr[2]:oddsStr[1]):null;
+    let kelly=0;
+    if(pickOdds&&!isNaN(parseFloat(pickOdds))){let prob=Math.max(o.pH,o.pA,o.pD)/100;kelly=(prob*(parseFloat(pickOdds)-1)-(1-prob))/1;if(kelly<0)kelly=0;}
+    let sel=selectedCombo.has(m.id);
+    html+=`<div class="combo-card${sel?' selected':''}" id="cb-${m.id}">
+      <div class="cb-top"><span class="cb-teams">${cn(m,"h")} VS ${cn(m,"a")}</span><span class="cb-pick ${sel?'on':'off'}" onclick="toggleCombo(${m.id})">${sel?'✅已选':'+选择'}</span></div>
+      <div style="font-size:10px;color:var(--t2)">🏆 ${pick}(${Math.max(o.pH,o.pA,o.pD)}%) · ⭐${o.stars} · ⚠️${o.riskLevel==="high"?"高":o.riskLevel==="mid"?"中":"低"}风险</div>
+      ${pickOdds?`<div style="font-size:10px;color:var(--t2)">💰 赔率${pickOdds} · 凯利${kelly.toFixed(2)}</div>`:""}
+      ${kelly>0?`<div class="kelly-bar"><div class="kelly-fill" style="width:${Math.min(kelly*100,100)}%"></div></div>`:""}
     </div>`;
   });
-  html += `</div>`;
-
+  html+=`</div>`;
+  // 计算结果
+  let chosen=ms.filter(m=>selectedCombo.has(m.id));
+  if(chosen.length>=2){
+    let picks=chosen.map(m=>{let o=preds[ms.indexOf(m)];return{team:cn(m,"h")+"-"+cn(m,"a"),dir:o.pH>=o.pA?"主胜":o.pA>=o.pH?"客胜":"平局",prob:Math.max(o.pH,o.pA,o.pD),oddsStr:m.odds}});
+    let hasAllOdds=picks.every(p=>p.oddsStr&&p.oddsStr!=="待获取");
+    let comboMult=1,comboProb=1;
+    picks.forEach(p=>{
+      let ods=p.oddsStr?p.oddsStr.split("/"):null;
+      let pickOdds=ods?(p.dir==="主胜"?ods[0]:p.dir==="客胜"?ods[2]:ods[1]):null;
+      if(pickOdds&&!isNaN(parseFloat(pickOdds)))comboMult*=parseFloat(pickOdds);
+      comboProb*=(p.prob/100);
+    });
+    comboMult=Math.round(comboMult*100)/100;comboProb=Math.round(comboProb*10000)/100;
+    let ev=comboMult*comboProb/100;
+    html+=`<div class="combo-result">
+      <h3 style="font-size:13px;color:#92400e;margin-bottom:8px">💡 ${chosen.length}串1 分析</h3>
+      ${picks.map((p,i)=>`<div style="font-size:11px;margin:3px 0">${i+1}. ${p.team} → ${p.dir} (${p.prob}%)</div>`).join("")}
+      <div style="margin-top:8px;font-size:11px">💰 ${hasAllOdds?`组合赔率 <b>${comboMult}</b> · 隐含回报率 <b>${(comboMult*2).toFixed(1)}元/2元</b>`:'部分场次无赔率，无法计算回报'}</div>
+      <div style="font-size:10px;color:var(--t2)">📊 模型胜率 ${comboProb}% · 期望值 ${ev>1?'+'+Math.round((ev-1)*100)+'%':'负值，不推荐'}</div>
+      ${hasAllOdds?`<div style="font-size:10px;color:var(--t2)">🎯 凯利推荐投注比例: ${Math.max(0,Math.round((ev-1)/(comboMult-1)*100))}%</div>`:""}
+    </div>`;
+  }else{html+=`<div style="color:var(--t2);font-size:12px;text-align:center;padding:20px">👆 请至少选择2场比赛查看串关分析</div>`;}
   return html;
 }
+function toggleCombo(id){
+  if(selectedCombo.has(id))selectedCombo.delete(id);else{if(selectedCombo.size>=4)return;selectedCombo.add(id);}
+  switchTab("combo",document.querySelectorAll(".tab")[1]);
+}
 
-function renderHistory() {
-  let h = DB.history || [];
-  let tot = h.reduce((s,x) => s + (x.t||0), 0);
-  let ok = h.reduce((s,x) => s + (x.ok||0), 0);
-  let rs = ((DB||{}).yesterday||{}).results||[];
-
-  let html = `
-  <div class="stats">
-    <div class="stat-card"><div class="val" style="color:#1e40af">${tot}</div><div class="lbl">累计研判</div></div>
-    <div class="stat-card"><div class="val" style="color:#10b981">${ok}</div><div class="lbl">正确预测</div></div>
-    <div class="stat-card"><div class="val" style="color:#${ok/tot>=.55?'10b981':'f59e0b'}">${tot?Math.round(ok/tot*100)+'%':'--'}</div><div class="lbl">累计准确率</div></div>
-    <div class="stat-card"><div class="val" style="color:#7c3aed">${RULES.length||25}</div><div class="lbl">算法规则</div></div>
+// ═══════════════ History / Rules / Model ═══════════
+function renderHistory(){
+  let h=DB.history||[],tot=h.reduce((s,x)=>s+(x.t||0),0),ok=h.reduce((s,x)=>s+(x.ok||0),0);
+  let rs=((DB||{}).yesterday||{}).results||[];
+  let html=`<div class="stats">
+    <div class="stat-card"><div class="icon">📊</div><div class="val" style="color:#3b82f6">${tot}</div><div class="lbl">累计研判</div></div>
+    <div class="stat-card"><div class="icon">✅</div><div class="val" style="color:#10b981">${ok}</div><div class="lbl">正确预测</div></div>
+    <div class="stat-card"><div class="icon">📈</div><div class="val" style="color:${tot&&ok/tot>=.55?'#10b981':'#f59e0b'}">${tot?Math.round(ok/tot*100)+'%':'--'}</div><div class="lbl">累计准确率</div></div>
+    <div class="stat-card"><div class="icon">🧠</div><div class="val" style="color:#7c3aed">${RULES.length||25}</div><div class="lbl">算法规则</div></div>
   </div>`;
-
-  // 逐日复盘
-  html += `<div style="margin-bottom:18px"><h3 style="font-size:14px;color:var(--pri2);margin-bottom:10px">🧠 逐日复盘</h3>`;
-  h.forEach(x => {
-    let rate = parseInt(x.r) || 0;
-    html += `<div class="lesson-card" style="border-left-color:${rate<55?'var(--danger)':'var(--success)'}">
-      <b>${x.d}</b> | ${x.t}场→${x.ok}正确(${x.r}) | 2串1:${x.p2||'--'} | 长串:${x.p3||'--'}<br>📝 ${x.lesson}</div>`;
-  });
-  html += `</div>`;
-
-  // 赛果表
-  if (rs.length) {
-    html += `<div style="overflow-x:auto"><table class="hist-table">
-      <tr><th>日期</th><th>对阵</th><th>比分</th><th>预测</th><th>结果</th><th>复盘</th></tr>
-      ${rs.map(r => `<tr>
-        <td>${r.date||""}</td><td>${r.match||""}</td><td><b>${r.result||"--"}</b></td>
-        <td>${r.p||""}</td>
-        <td>${r.w===true?'<span style="color:var(--success);font-weight:700">✅</span>':r.w===false?'<span style="color:var(--danger);font-weight:700">❌</span>':'<span style="color:var(--warn)">⏳</span>'}</td>
-        <td style="font-size:10px">${r.note||""}</td>
-      </tr>`).join("")}
-    </table></div>`;
-  }
-
+  html+=`<div style="margin-bottom:18px"><h3 style="font-size:14px;color:var(--pri2);margin-bottom:10px">🧠 逐日复盘</h3>`;
+  h.forEach(x=>{let rate=parseInt(x.r)||0;html+=`<div class="lesson-card" style="border-left-color:${rate<55?'var(--danger)':'var(--success)'}"><b>${x.d}</b> | ${x.t}场→${x.ok}正确(${x.r}) | 2串1:${x.p2||'--'} | 长串:${x.p3||'--'}<br>📝 ${x.lesson}</div>`;});
+  html+=`</div>`;
+  if(rs.length){html+=`<div style="overflow-x:auto"><table class="hist-table"><tr><th>日期</th><th>对阵</th><th>比分</th><th>预测</th><th>结果</th><th>复盘</th></tr>${rs.map(r=>`<tr><td>${r.date||""}</td><td>${r.match||""}</td><td><b>${r.result||"--"}</b></td><td>${r.p||""}</td><td>${r.w===true?'<span style="color:var(--success);font-weight:700">✅</span>':r.w===false?'<span style="color:var(--danger);font-weight:700">❌</span>':'<span style="color:var(--warn)">⏳</span>'}</td><td style="font-size:10px">${r.note||""}</td></tr>`).join("")}</table></div>`;}
   return html;
 }
 
-function renderRules() {
-  let rules = RULES.length ? RULES : [];
-  if (!rules.length) {
-    return `<div class="empty"><div class="icon">🧠</div><p>暂无规则数据</p></div>`;
-  }
-  let cats = [...new Set(rules.map(r => r.c))];
-  let html = `<div style="background:var(--card);border-radius:12px;padding:20px 24px;box-shadow:var(--shadow);border:1px solid var(--border)">
-    <h3 style="font-size:14px;color:var(--pri2);margin-bottom:14px">🧠 ${rules.length}条算法规则 <span style="font-size:10px;font-weight:400;color:var(--t2)">复盘13 + 学术6 + 实战6</span></h3>`;
-  cats.forEach(c => {
-    html += `<div class="rule-group"><h4>▸ ${c}</h4>
-      <table class="rule-table"><tr><th>#</th><th>规则</th><th>内容</th><th>来源</th></tr>
-      ${rules.filter(r => r.c===c).map(r => `<tr><td>${r.id}</td><td><b>${r.n}</b></td><td style="font-size:10px">${r.d}</td><td style="font-size:10px;color:var(--t3)">${r.f}</td></tr>`).join("")}
-      </table></div>`;
-  });
-  html += `</div>`;
+function renderBacktest(){
+  let h=DB.history||[];
+  if(!h.length)return`<div class="empty"><div class="icon">📈</div><p>暂无回测数据</p><div class="sub">积累更多历史数据后自动生成</div></div>`;
+  let html=`<div class="stats"><div class="stat-card"><div class="val" style="color:#3b82f6">${h.length}</div><div class="lbl">回测天数</div></div>
+    <div class="stat-card"><div class="val" style="color:#10b981">${Math.round(h.reduce((s,x)=>s+parseInt(x.r)||0,0)/h.length)}%</div><div class="lbl">平均准确率</div></div>
+    <div class="stat-card"><div class="val" style="color:#f59e0b">${h.reduce((s,x)=>s+(x.p2&&x.p2.includes('✅')?1:0),0)}</div><div class="lbl">2串1命中</div></div>
+    <div class="stat-card"><div class="val" style="color:#7c3aed">${h.reduce((s,x)=>s+(x.t||0),0)}</div><div class="lbl">总场次</div></div></div>`;
+  html+=`<div class="chart-wrap"><h4 style="font-size:12px;color:var(--pri2);margin-bottom:10px">📈 准确率趋势</h4><canvas id="backtestCanvas" style="width:100%;height:250px"></canvas></div>`;
   return html;
 }
 
-function renderModel() {
-  return `<div style="background:var(--card);border-radius:12px;padding:22px 26px;box-shadow:var(--shadow);border:1px solid var(--border);font-size:13px;line-height:2">
-    <h3 style="font-size:14px;color:var(--pri2);margin-bottom:14px">📐 Poisson-Elo 混合预测模型 v2.1</h3>
-    <p><b>数据来源:</b> football-data.org API (免费层) → GitHub Actions 每3h自动抓取 → data.json</p>
-    <p><b>覆盖联赛:</b> 巴甲🇧🇷(BSA) · 欧冠🏆(CL) · 英超🏴󠁧󠁢󠁥󠁮󠁧󠁿(PL) · 德甲🇩🇪(BL1) · 意甲🇮🇹(SA) · 西甲🇪🇸(PD) · 法甲🇫🇷(FL1) · 荷甲🇳🇱(DED) · 葡超🇵🇹(PPL)</p>
-    <p style="color:var(--warn);font-size:10px">⚠️ 免费层无赔率数据，模型以纯Poisson-Elo模式运行（无市场融合），8月欧洲联赛开赛后数据自动补全</p>
-    <p><b>预测流程:</b></p>
-    <ol style="padding-left:20px;margin:6px 0">
-      <li><b>排名→Elo:</b> 联赛排名转换为Elo评分 (1720−18×rank)，主场优势+120 Elo</li>
+function renderBacktestChart(){
+  let canvas=document.getElementById("backtestCanvas");
+  if(!canvas)return;
+  let ctx=canvas.getContext("2d"),W=canvas.parentElement.clientWidth-44,H=250,dpr=window.devicePixelRatio||1;
+  canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+"px";canvas.style.height=H+"px";ctx.scale(dpr,dpr);
+  let h=DB.history||[];
+  let rates=h.map(x=>parseInt(x.r)||0);
+  let cumRates=[],sum=0,sumN=0;
+  h.forEach((x,i)=>{let r=parseInt(x.r)||0,t=x.t||0;sum+=t*(r/100);sumN+=t;cumRates.push(Math.round(sum/sumN*100));});
+  let pad={t:20,r:16,b:30,l:36},pw=W-pad.l-pad.r,ph=H-pad.t-pad.b;
+  let borderColor=getComputedStyle(document.body).getPropertyValue("--border").trim()||"#334155";
+  ctx.strokeStyle=borderColor;ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+ph);ctx.lineTo(pad.l+pw,pad.t+ph);ctx.stroke();
+  // Y axis
+  ctx.fillStyle=getComputedStyle(document.body).getPropertyValue("--t3").trim();ctx.font="9px sans-serif";ctx.textAlign="right";
+  for(let v=0;v<=100;v+=25){let y=pad.t+ph*(1-v/100);ctx.fillText(v+"%",pad.l-4,y+3);
+    ctx.strokeStyle=borderColor;ctx.globalAlpha=.3;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+pw,y);ctx.stroke();ctx.globalAlpha=1;}
+  // Daily bars
+  let barW=Math.min(30,pw/rates.length*.7);
+  rates.forEach((r,i)=>{let x=pad.l+pw*i/(rates.length-1||1)-barW/2;if(rates.length===1)x=pad.l+pw/2-barW/2;let h2=ph*r/100;ctx.fillStyle="#3b82f6";ctx.globalAlpha=.5;ctx.fillRect(x,pad.t+ph-h2,barW,h2);ctx.globalAlpha=1;});
+  // Cumulative line
+  ctx.strokeStyle="#f59e0b";ctx.lineWidth=2.5;ctx.beginPath();
+  cumRates.forEach((r,i)=>{let x=rates.length===1?pad.l+pw/2:pad.l+pw*i/(rates.length-1||1),y=pad.t+ph*(1-r/100);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});ctx.stroke();
+  // Dots
+  cumRates.forEach((r,i)=>{let x=rates.length===1?pad.l+pw/2:pad.l+pw*i/(rates.length-1||1),y=pad.t+ph*(1-r/100);ctx.fillStyle="#f59e0b";ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fill();});
+  // Labels
+  ctx.fillStyle=getComputedStyle(document.body).getPropertyValue("--t3").trim();ctx.font="8px sans-serif";ctx.textAlign="center";
+  h.forEach((x,i)=>{let xPos=rates.length===1?pad.l+pw/2:pad.l+pw*i/(rates.length-1||1);ctx.fillText(x.d,xPos,pad.t+ph+18);});
+  ctx.fillStyle="#f59e0b";ctx.textAlign="left";ctx.fillText("─ 累计准确率",pad.l+8,pad.t+12);
+  ctx.fillStyle="#3b82f6";ctx.globalAlpha=.5;ctx.fillRect(pad.l+pw-80,pad.t-6,10,10);ctx.globalAlpha=1;ctx.fillText("日准确率",pad.l+pw-67,pad.t+4);
+}
+
+function renderRules(){
+  let rules=RULES.length?RULES:[];
+  if(!rules.length)return`<div class="empty"><div class="icon">🧠</div><p>暂无规则数据</p></div>`;
+  let cats=[...new Set(rules.map(r=>r.c))];
+  let html=`<div style="background:var(--card);border-radius:12px;padding:20px 24px;box-shadow:var(--shadow);border:1px solid var(--border)"><h3 style="font-size:14px;color:var(--pri2);margin-bottom:14px">🧠 ${rules.length}条算法规则</h3>`;
+  cats.forEach(c=>{html+=`<div class="rule-group"><h4>▸ ${c}</h4><table class="rule-table"><tr><th>#</th><th>规则</th><th>内容</th><th>来源</th></tr>${rules.filter(r=>r.c===c).map(r=>`<tr><td>${r.id}</td><td><b>${r.n}</b></td><td style="font-size:10px">${r.d}</td><td style="font-size:10px;color:var(--t3)">${r.f}</td></tr>`).join("")}</table></div>`;});
+  html+=`</div>`;return html;
+}
+
+function renderModel(){
+  return`<div style="background:var(--card);border-radius:12px;padding:22px 26px;box-shadow:var(--shadow);border:1px solid var(--border);font-size:13px;line-height:2">
+    <h3 style="font-size:14px;color:var(--pri2);margin-bottom:14px">📐 Poisson-Elo 混合预测模型 v3</h3>
+    <p><b>数据来源:</b> football-data.org (排名+状态+赛程) + 中国体育彩票竞彩官方 (赔率+中文名+竞彩编号)</p>
+    <p><b>覆盖联赛:</b> 巴甲🇧🇷 · 欧冠🏆 · 英超🏴 · 德甲🇩🇪 · 意甲🇮🇹 · 西甲🇪🇸 · 法甲🇫🇷 · 荷甲🇳🇱 · 葡超🇵🇹 · 英冠🏴</p>
+    <p><b>预测流程:</b></p><ol style="padding-left:20px;margin:6px 0">
+      <li><b>排名→Elo:</b> 联赛排名转换为Elo评分 (1720−18×rank)，主场+120 Elo</li>
       <li><b>状态调整:</b> 近5场W/D/L解析，连胜/连败/平局率微调Elo (±30)</li>
-      <li><b>H2H修正:</b> 交手记录极端值(血脉压制/0胜魔咒)调整Elo (±25)</li>
+      <li><b>H2H修正:</b> 交手记录极端值调整Elo (±25)</li>
       <li><b>期望进球λ:</b> Elo差异→logistic胜率→衰减进球份额→主客队期望进球数</li>
-      <li><b>比分矩阵:</b> 双泊松分布计算0:0~8:8共81种比分的精确概率</li>
+      <li><b>比分矩阵:</b> 双泊松分布计算0:0~8:8共81种比分概率</li>
       <li><b>Dixon-Coles修正:</b> 对(0,0)(1,0)(0,1)(1,1)四组低比分修正，ρ=−0.04</li>
-      <li><b>市场融合:</b> 竞彩赔率去水后以50%权重与模型概率加权</li>
-      <li><b>实战规则:</b> 平赔>3.9自动降平局概率; 赔率<1.30触发大热必死警告</li>
-      <li><b>联赛微调:</b> 欧冠平局+4%，北欧主场+3%</li>
+      <li><b>市场融合:</b> 竞彩赔率去水后50%权重与模型概率加权</li>
+      <li><b>实战规则:</b> 平赔>3.9自动降权; 赔率<1.30触发大热必死; 伪不败检测; 战意因子</li>
     </ol>
-    <p><b>推荐阈值:</b> 主/客胜≥54%直接推荐; 平局≥42%才单推; 差距<12%才提示防平</p>
-    <p><b>性能基准:</b> Poisson-Elo混合模型典型准确率 53-55%（纯泊松~51%, 市场赔率~52%, 混合~54%）</p>
+    <p><b>推荐阈值:</b> 主/客胜≥54%直接推荐; 平局≥42%才单推</p>
     <p style="color:var(--t2);font-size:11px">参考文献: Maher (1982), Dixon & Coles (1997), Štrumbelj (2014), Wilkens (2026), Saribekyan & Yarovoy (2024)</p>
+    <p style="color:var(--warn);font-size:10px">⚠️ 免费层无赔率时以纯Poisson-Elo模式运行; 竞彩赔率来自中国体育彩票官方数据</p>
   </div>`;
 }
 
-// ═══════════════════════════════════════════
-//  数据加载 · football-data.org API
-//  GitHub Actions每3h自动更新 data.json
-// ═══════════════════════════════════════════
-
-let DATA_SRC = "加载中...";
-
-async function loadData() {
-  try {
-    let r = await fetch("data.json?" + Date.now());
-    DB = await r.json();
-    let src = (DB.today.matches||[])[0];
-    DATA_SRC = (src&&src.xp) || "football-data.org " + (DB.updated||"--");
-  } catch(e) {
-    DATA_SRC = "加载失败";
-    if (!DB) DB = { today:{matches:[]}, yesterday:{results:[]}, history:[], rules:[], updated:"--" };
-  }
-  RULES = DB.rules || [];
-  updateHeader();
+// ═══════════════ Theme ═══════════
+function toggleTheme(){
+  let b=document.body,btn=document.getElementById("themeBtn");
+  b.classList.toggle("dark");
+  let isDark=b.classList.contains("dark");
+  btn.textContent=isDark?"☀️ 亮色":"🌙 暗色";
+  localStorage.setItem("theme",isDark?"dark":"light");
+  // Re-render charts if visible
+  let curTab=document.querySelector(".tab.on");
+  if(curTab&&curTab.textContent.includes("今日"))renderPoissonCharts();
+  if(curTab&&curTab.textContent.includes("回测"))renderBacktestChart();
 }
 
-(async function init() {
+// ═══════════════ Collapse ═══════════
+function toggleCollapse(id,el){
+  let body=document.getElementById(id);
+  el.classList.toggle("open");
+  if(body.style.maxHeight==="0px"||body.classList.contains("hidden")){body.style.maxHeight="9999px";body.classList.remove("hidden");}
+  else{body.style.maxHeight="0px";body.classList.add("hidden");}
+}
+
+// ═══════════════ Data Loading ═══════════
+async function loadData(){
+  try{
+    let r=await fetch("data.json?"+Date.now());
+    DB=await r.json();
+    DATA_SRC=DB.today.matches.length>0&&DB.today.matches[0].isLottery?"竞彩+football-data":"football-data.org";
+  }catch(e){
+    DATA_SRC="加载失败";
+    if(!DB)DB={today:{matches:[]},yesterday:{results:[]},history:[],rules:[],updated:"--"};
+  }
+  RULES=DB.rules||[];updateHeader();
+}
+
+async function refreshData(){
+  let btn=document.getElementById("refreshBtn");
+  btn.classList.add("spin");btn.textContent="⏳ 刷新中...";
   await loadData();
-  switchTab("today", document.querySelector(".tab"));
-  setInterval(async () => { await loadData(); }, 600000);
+  let curTab=document.querySelector(".tab.on");
+  if(curTab){let t=curTab.textContent;switchTab(t.includes("今日")?"today":t.includes("串关")?"combo":t.includes("历史")?"history":t.includes("回测")?"backtest":t.includes("规则")?"rules":"model",curTab);}
+  btn.classList.remove("spin");btn.textContent="✅ "+DATA_SRC;
+  setTimeout(()=>{btn.textContent="🔄 刷新"},2500);
+}
+
+(function init(){
+  let saved=localStorage.getItem("theme");
+  if(saved==="dark"){document.body.classList.add("dark");document.getElementById("themeBtn").textContent="☀️ 亮色";}
+  loadData().then(()=>{switchTab("today",document.querySelector(".tab"));});
+  setInterval(async()=>{await loadData();},600000);
 })();
-
-async function refreshData() {
-  let btn = document.getElementById("refreshBtn");
-  btn.classList.add("spin"); btn.textContent = "⏳ 刷新中...";
-  await loadData();
-  let curTab = document.querySelector(".tab.on");
-  if (curTab) {
-    let t = curTab.textContent;
-    switchTab(t.includes("今日")?"today":t.includes("历史")?"history":t.includes("规则")?"rules":"model", curTab);
-  }
-  btn.classList.remove("spin");
-  btn.textContent = "✅ "+DATA_SRC;
-  setTimeout(() => { btn.textContent = "🔄 刷新"; }, 2500);
-}
 </script>
 </body>
 </html>
