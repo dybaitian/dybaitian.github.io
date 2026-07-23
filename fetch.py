@@ -277,10 +277,19 @@ def _cn_name(en_name):
 # ═══════════════════════════════════════════
 
 def main():
-    today = time.strftime("%Y-%m-%d")
-    print(f"📡 {time.strftime('%Y-%m-%d %H:%M')} v8 双源融合")
+    # ── 比赛日 = 北京时间今天11:00 ~ 明天10:59 ──
+    now = time.time()
+    bt = time.localtime(now)
+    if bt.tm_hour < 11:
+        # 还没到11点，当前比赛日从昨天11点开始
+        match_day_start = now - 86400
+    else:
+        match_day_start = now
+    match_day_date = time.strftime("%Y-%m-%d", time.localtime(match_day_start))
+    print(f"📡 {time.strftime('%Y-%m-%d %H:%M')} v8 双源融合 · 比赛日 {match_day_date}")
 
-    date_to = time.strftime("%Y-%m-%d", time.localtime(time.time() + 4 * 86400))
+    date_from = time.strftime("%Y-%m-%d", time.localtime(match_day_start - 86400))
+    date_to = time.strftime("%Y-%m-%d", time.localtime(match_day_start + 5 * 86400))
 
     # 读已有数据
     existing = {"history": [], "rules": [], "yesterday": {"results": []}}
@@ -302,7 +311,7 @@ def main():
         if not ranks:
             continue
 
-        raw = fetch_matches(comp_id, today, date_to)
+        raw = fetch_matches(comp_id, date_from, date_to)
         if not raw:
             print(f"  {flag}{cn_name}: 0场")
             continue
@@ -336,16 +345,27 @@ def main():
                 utc_dt = datetime.fromisoformat(m["utcDate"].replace("Z", "+00:00"))
                 bj_dt = utc_dt + timedelta(hours=8)
                 short_time = bj_dt.strftime("%H:%M")
+                # 比赛日: 11点后属于当天, 11点前属于前一天
+                if bj_dt.hour >= 11:
+                    match_day = bj_dt.strftime("%Y-%m-%d")
+                else:
+                    match_day = (bj_dt - timedelta(days=1)).strftime("%Y-%m-%d")
             except:
                 short_time = m["utcDate"][11:16] if "T" in m["utcDate"] else m["utcDate"][:5]
+                match_day = m["utcDate"][:10]
 
             h_wdl, h_form = forms.get(ht_id, ("?", "数据缺失"))
             a_wdl, a_form = forms.get(at_id, ("?", "数据缺失"))
             fm_text = f"主({h_wdl}): {h_form} | 客({a_wdl}): {a_form}"
 
+            # 只保留当前比赛日及之后的比赛
+            if match_day < match_day_date:
+                continue
+
             all_matches.append({
                 "id": len(all_matches) + 1,
                 "lg": f"{flag} {cn_name}",
+                "matchDay": match_day,
                 "tm": short_time,
                 "h": h_en, "a": a_en,
                 "hCn": h_cn, "aCn": a_cn,
@@ -389,7 +409,7 @@ def main():
     tc = len(unique)
 
     existing["updated"] = time.strftime("%Y-%m-%d %H:%M")
-    existing["today"] = {"date": today, "matches": unique}
+    existing["today"] = {"date": match_day_date, "matches": unique}
     existing["_lottery_count"] = lc
     existing["_total_count"] = tc
 

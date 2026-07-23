@@ -363,7 +363,9 @@ function renderToday(){
   let safe=preds.map((p,i)=>({p,i,m:ms[i]})).filter(x=>x.p.riskLevel!=="high"&&(x.p.pH>=55||x.p.pA>=55));
   let planLegs=safe.slice(0,2);
 
+  let matchDayLabel=((DB||{}).today||{}).date||"";
   let html=`
+  <div style="margin-bottom:12px;font-size:13px;font-weight:700;color:var(--pri2)">📅 比赛日: ${matchDayLabel} <span style="font-size:10px;font-weight:400;color:var(--t3)">(11:00~次日10:59)</span></div>
   <div class="stats">
     <div class="stat-card"><div class="icon">📊</div><div class="val" style="color:#3b82f6">${tot}</div><div class="lbl">累计研判</div></div>
     <div class="stat-card"><div class="icon">📅</div><div class="val" style="color:#64748b">${ms.length}</div><div class="lbl">今日场次</div></div>
