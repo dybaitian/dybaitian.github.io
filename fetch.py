@@ -163,14 +163,18 @@ def fetch_matches(comp_id, date_from, date_to):
     data = api_fd(url)
     return data.get("matches", []) if data else []
 
-def fetch_team_form(team_id, team_name):
-    url = f"{BASE}/teams/{team_id}/matches?limit=5&status=FINISHED"
+def fetch_team_data(team_id, team_name):
+    """获取球队近30场战绩 → (wdl, form_text, recent_matches)"""
+    url = f"{BASE}/teams/{team_id}/matches?limit=30&status=FINISHED"
     data = api_fd(url)
-    if not data: return ("?", "数据缺失")
+    if not data: return ("?", "数据缺失", [])
+
+    all_matches = data.get("matches", [])
+    recent5 = all_matches[:5]
 
     wdl = []
     home_r, away_r = [], []
-    for m in data.get("matches", []):
+    for m in recent5:
         is_home = m["homeTeam"]["id"] == team_id
         hs = m["score"]["fullTime"]["home"]
         aw = m["score"]["fullTime"]["away"]
@@ -194,7 +198,75 @@ def fetch_team_form(team_id, team_name):
     if away_r.count("L") >= 3: parts.append("客场疲软")
     if away_r.count("W") >= 3: parts.append("客场强势")
 
-    return (wdl_s, "，".join(parts))
+    return (wdl_s, "，".join(parts), all_matches)
+
+
+def build_h2h(home_matches, away_matches, home_en, away_en, home_cn, away_cn):
+    """从两队近期比赛提取H2H记录"""
+    h2h_records = []
+    # 从主队近期比赛找对方
+    for m in home_matches:
+        ht_id = m["homeTeam"]["id"]
+        at_id = m["awayTeam"]["id"]
+        hs = m["score"]["fullTime"]["home"]
+        aw = m["score"]["fullTime"]["away"]
+        # 检查客场队是否参与 (用名字关键词匹配)
+        if not _team_in_match(away_cn, m["homeTeam"]["name"], m["awayTeam"]["name"]):
+            continue
+        # 主队(en)在这场H2H中是否主场?
+        h_is_home = _team_is_target(home_cn, m["homeTeam"]["name"])
+        if h_is_home:
+            gf, ga = hs, aw
+        else:
+            gf, ga = aw, hs
+        h2h_records.append({
+            "date": m["utcDate"][:10],
+            "gf": gf, "ga": ga,
+            "h_is_home": h_is_home,
+        })
+
+    if not h2h_records:
+        return "近期无交手记录"
+
+    h_w, h_d, a_w = 0, 0, 0
+    for r in h2h_records:
+        if r["gf"] > r["ga"]: h_w += 1
+        elif r["gf"] < r["ga"]: a_w += 1
+        else: h_d += 1
+
+    total = h_w + h_d + a_w
+    recent = h2h_records[0]
+    loc = "主" if recent["h_is_home"] else "客"
+    base = f"近{total}次{home_cn}{h_w}胜{h_d}平{a_w}负"
+    if total >= 4:
+        if h_w == 0: base += f" ⚠️0胜魔咒!"
+        elif a_w == 0: base += " 不败"
+        elif h_w >= total * 0.7: base += " 🔥血脉压制!"
+        elif a_w >= total * 0.7: base += f" 🔥被{away_cn}压制!"
+    base += f" | 最近{recent['date']} {loc}场 {recent['gf']}-{recent['ga']}"
+    return base
+
+
+def _team_is_target(cn_name, en_name):
+    """中文名是否匹配英文名"""
+    for en, cn in TEAM_CN.items():
+        if cn == cn_name:
+            pa = set(en.lower().replace("fc","").replace("sc","").replace("ec","").split())
+            pb = set(en_name.lower().replace("fc","").replace("sc","").replace("ec","").split())
+            return len(pa & pb) >= 1
+    return False
+
+
+def _team_in_match(cn_name, home_name, away_name):
+    """检查中文队名是否参与这场比赛"""
+    for en, cn in TEAM_CN.items():
+        if cn == cn_name:
+            en_parts = set(en.lower().replace("fc","").replace("sc","").replace("ec","").split())
+            h_parts = set(home_name.lower().replace("fc","").replace("sc","").replace("ec","").split())
+            a_parts = set(away_name.lower().replace("fc","").replace("sc","").replace("ec","").split())
+            if en_parts & h_parts or en_parts & a_parts:
+                return True
+    return False
 
 # ═══════════════════════════════════════════
 #  sporttery.cn
@@ -325,7 +397,7 @@ def main():
         for tid in team_ids:
             tname = next((m["homeTeam"]["name"] for m in raw if m["homeTeam"]["id"] == tid),
                          next((m["awayTeam"]["name"] for m in raw if m["awayTeam"]["id"] == tid), f"#{tid}"))
-            forms[tid] = fetch_team_form(tid, tname)
+            forms[tid] = fetch_team_data(tid, tname)
 
         for m in raw:
             ht_id = m["homeTeam"]["id"]
@@ -354,9 +426,10 @@ def main():
                 short_time = m["utcDate"][11:16] if "T" in m["utcDate"] else m["utcDate"][:5]
                 match_day = m["utcDate"][:10]
 
-            h_wdl, h_form = forms.get(ht_id, ("?", "数据缺失"))
-            a_wdl, a_form = forms.get(at_id, ("?", "数据缺失"))
+            h_wdl, h_form, h_matches = forms.get(ht_id, ("?", "数据缺失", []))
+            a_wdl, a_form, a_matches = forms.get(at_id, ("?", "数据缺失", []))
             fm_text = f"主({h_wdl}): {h_form} | 客({a_wdl}): {a_form}"
+            h2h_text = build_h2h(h_matches, a_matches, h_en, a_en, h_cn, a_cn)
 
             # 只保留当前比赛日及之后的比赛
             if match_day < match_day_date:
@@ -375,7 +448,7 @@ def main():
                 "isLottery": False,
                 "handicap": "",
                 "odds_hhad": "",
-                "h2h": "数据待补充",
+                "h2h": h2h_text,
                 "inj": "无关键伤停",
                 "fm": fm_text,
                 "xp": "football-data.org",
