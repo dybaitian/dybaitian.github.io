@@ -1,58 +1,10 @@
 {
-  "updated": "2026-07-23 17:38",
+  "updated": "2026-07-23 17:08",
   "today": {
     "date": "2026-07-23",
     "matches": [
       {
         "id": 1,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-07-23",
-        "tm": "06:30",
-        "h": "SC Corinthians Paulista",
-        "a": "Clube do Remo",
-        "hCn": "科林蒂安",
-        "aCn": "里莫",
-        "hr": 13,
-        "ar": 19,
-        "odds": "1.330/4.150/7.300",
-        "matchNum": 4201,
-        "isLottery": true,
-        "handicap": "-1",
-        "odds_hhad": "2.250/3.150/2.720",
-        "h2h": "近期无交手记录",
-        "inj": "无关键伤停",
-        "fm": "主(LWWDL): 近5场2胜1平2负 | 客(LDDDL): 近5场0胜3平2负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/1779.png",
-        "aCrest": "https://crests.football-data.org/4287.png",
-        "lgCn": "巴甲"
-      },
-      {
-        "id": 2,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-07-23",
-        "tm": "06:30",
-        "h": "Botafogo FR",
-        "a": "EC Vitória",
-        "hCn": "博塔弗戈",
-        "aCn": "维多利亚",
-        "hr": 10,
-        "ar": 12,
-        "odds": "1.560/3.580/4.780",
-        "matchNum": 4202,
-        "isLottery": true,
-        "handicap": "-1",
-        "odds_hhad": "3.000/3.150/2.090",
-        "h2h": "近期无交手记录",
-        "inj": "无关键伤停",
-        "fm": "主(WLLLW): 状态下滑，近5场2胜0平3负，客场疲软 | 客(WLLDW): 近5场2胜1平2负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/1770.png",
-        "aCrest": "https://crests.football-data.org/1782.png",
-        "lgCn": "巴甲"
-      },
-      {
-        "id": 3,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "03:00",
@@ -75,7 +27,7 @@
         "aCrest": "https://crests.football-data.org/1779.png"
       },
       {
-        "id": 4,
+        "id": 2,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "03:00",
@@ -98,7 +50,7 @@
         "aCrest": "https://crests.football-data.org/1770.png"
       },
       {
-        "id": 5,
+        "id": 3,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-25",
         "tm": "05:30",
@@ -121,7 +73,7 @@
         "aCrest": "https://crests.football-data.org/6684.png"
       },
       {
-        "id": 6,
+        "id": 4,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-25",
         "tm": "05:30",
@@ -144,7 +96,7 @@
         "aCrest": "https://crests.football-data.org/1772_large.png"
       },
       {
-        "id": 7,
+        "id": 5,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -167,7 +119,7 @@
         "aCrest": "https://crests.football-data.org/4241.png"
       },
       {
-        "id": 8,
+        "id": 6,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -190,7 +142,7 @@
         "aCrest": "https://crests.football-data.org/1776.png"
       },
       {
-        "id": 9,
+        "id": 7,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -211,6 +163,52 @@
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1767.png",
         "aCrest": "https://crests.football-data.org/1765.png"
+      },
+      {
+        "id": 8,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-23",
+        "tm": "06:30",
+        "h": "Botafogo FR",
+        "a": "EC Vitória",
+        "hCn": "博塔弗戈",
+        "aCn": "维多利亚",
+        "hr": 10,
+        "ar": 12,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近期无交手记录",
+        "inj": "无关键伤停",
+        "fm": "主(WLLLW): 状态下滑，近5场2胜0平3负，客场疲软 | 客(WLLDW): 近5场2胜1平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1770.png",
+        "aCrest": "https://crests.football-data.org/1782.png"
+      },
+      {
+        "id": 9,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-23",
+        "tm": "06:30",
+        "h": "SC Corinthians Paulista",
+        "a": "Clube do Remo",
+        "hCn": "科林蒂安",
+        "aCn": "里莫",
+        "hr": 13,
+        "ar": 19,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近期无交手记录",
+        "inj": "无关键伤停",
+        "fm": "主(LWWDL): 近5场2胜1平2负 | 客(LDDDL): 近5场0胜3平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1779.png",
+        "aCrest": "https://crests.football-data.org/4287.png"
       },
       {
         "id": 10,
@@ -526,6 +524,6 @@
       "f": "实战"
     }
   ],
-  "_lottery_count": 2,
+  "_lottery_count": 0,
   "_total_count": 12
 }
