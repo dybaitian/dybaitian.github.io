@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-24 09:17",
+  "updated": "2026-07-24 18:01",
   "today": {
-    "date": "2026-07-23",
+    "date": "2026-07-24",
     "matches": [
       {
         "id": 1,
@@ -52,6 +52,98 @@
       {
         "id": 3,
         "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-29",
+        "tm": "04:00",
+        "h": "CA Mineiro",
+        "a": "RB Bragantino",
+        "hCn": "米内罗竞技",
+        "aCn": "布拉甘蒂诺红牛",
+        "hr": 13,
+        "ar": 5,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次米内罗竞技0胜0平1负 | 最近2026-02-04 客场 0-1",
+        "inj": "无关键伤停",
+        "fm": "主(DLDLW): 近5场1胜2平2负 | 客(WWLDD): 状态平稳，近5场2胜2平1负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1766.png",
+        "aCrest": "https://crests.football-data.org/4286.png"
+      },
+      {
+        "id": 4,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-29",
+        "tm": "04:00",
+        "h": "Botafogo FR",
+        "a": "Grêmio FBPA",
+        "hCn": "博塔弗戈",
+        "aCn": "格雷米奥",
+        "hr": 9,
+        "ar": 16,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次博塔弗戈0胜0平1负 | 最近2026-02-05 客场 3-5",
+        "inj": "无关键伤停",
+        "fm": "主(WLLLW): 状态下滑，近5场2胜0平3负，客场疲软 | 客(LWLWD): 近5场2胜1平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1770.png",
+        "aCrest": "https://crests.football-data.org/1767.png"
+      },
+      {
+        "id": 5,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-29",
+        "tm": "04:00",
+        "h": "Chapecoense AF",
+        "a": "CR Vasco da Gama",
+        "hCn": "沙佩科恩斯",
+        "aCn": "瓦斯科达伽马",
+        "hr": 20,
+        "ar": 17,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近2次沙佩科恩斯0胜1平1负 | 最近2026-02-05 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(WDDLD): 状态平稳，近5场1胜3平1负 | 客(LDLLW): 状态下滑，近5场1胜1平3负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1772_large.png",
+        "aCrest": "https://crests.football-data.org/1780.png"
+      },
+      {
+        "id": 6,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-29",
+        "tm": "04:00",
+        "h": "São Paulo FC",
+        "a": "Santos FC",
+        "hCn": "圣保罗",
+        "aCn": "桑托斯",
+        "hr": 12,
+        "ar": 15,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次圣保罗0胜1平0负 | 最近2026-02-04 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(WDWWW): 状态火爆，近5场4胜1平0负，主场强势 | 客(LDLWD): 近5场1胜2平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1776.png",
+        "aCrest": "https://crests.football-data.org/6685.png"
+      },
+      {
+        "id": 7,
+        "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-25",
         "tm": "05:30",
         "h": "CA Paranaense",
@@ -73,7 +165,7 @@
         "aCrest": "https://crests.football-data.org/6684.png"
       },
       {
-        "id": 4,
+        "id": 8,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-25",
         "tm": "05:30",
@@ -96,7 +188,7 @@
         "aCrest": "https://crests.football-data.org/1772_large.png"
       },
       {
-        "id": 5,
+        "id": 9,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -119,7 +211,7 @@
         "aCrest": "https://crests.football-data.org/4241.png"
       },
       {
-        "id": 6,
+        "id": 10,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -142,7 +234,7 @@
         "aCrest": "https://crests.football-data.org/1776.png"
       },
       {
-        "id": 7,
+        "id": 11,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -165,7 +257,7 @@
         "aCrest": "https://crests.football-data.org/1765.png"
       },
       {
-        "id": 8,
+        "id": 12,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "06:30",
@@ -188,7 +280,7 @@
         "aCrest": "https://crests.football-data.org/1766.png"
       },
       {
-        "id": 9,
+        "id": 13,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "06:30",
@@ -211,7 +303,53 @@
         "aCrest": "https://crests.football-data.org/1782.png"
       },
       {
-        "id": 10,
+        "id": 14,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-29",
+        "tm": "06:30",
+        "h": "SC Internacional",
+        "a": "CR Flamengo",
+        "hCn": "巴西国际",
+        "aCn": "弗拉门戈",
+        "hr": 14,
+        "ar": 2,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近2次巴西国际1胜1平0负 | 最近2026-02-04 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(LDLDL): 状态下滑，近5场0胜2平3负 | 客(LDWWW): 状态良好，近5场3胜1平1负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/6684.png",
+        "aCrest": "https://crests.football-data.org/1783.png"
+      },
+      {
+        "id": 15,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-29",
+        "tm": "06:30",
+        "h": "Mirassol FC",
+        "a": "Clube do Remo",
+        "hCn": "米拉索尔",
+        "aCn": "里莫",
+        "hr": 18,
+        "ar": 19,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次米拉索尔0胜1平0负 | 最近2026-02-04 客场 2-2",
+        "inj": "无关键伤停",
+        "fm": "主(WDDDL): 状态平稳，近5场1胜3平1负 | 客(LDDDL): 近5场0胜3平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/4364.png",
+        "aCrest": "https://crests.football-data.org/4287.png"
+      },
+      {
+        "id": 16,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-25",
         "tm": "07:30",
@@ -479,5 +617,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 10
+  "_total_count": 16
 }
