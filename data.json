@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-25 18:16",
+  "updated": "2026-07-26 07:20",
   "today": {
     "date": "2026-07-25",
     "matches": [
@@ -128,7 +128,7 @@
         "hCn": "圣保罗",
         "aCn": "桑托斯",
         "hr": 12,
-        "ar": 15,
+        "ar": 14,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -143,52 +143,6 @@
       },
       {
         "id": 7,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-07-25",
-        "tm": "05:30",
-        "h": "CA Paranaense",
-        "a": "SC Internacional",
-        "hCn": "巴拉纳竞技",
-        "aCn": "巴西国际",
-        "hr": 3,
-        "ar": 14,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近1次巴拉纳竞技1胜0平0负 | 最近2026-01-28 客场 1-0",
-        "inj": "无关键伤停",
-        "fm": "主(WWLDL): 近5场2胜1平2负 | 客(LDLDL): 状态下滑，近5场0胜2平3负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/1768.png",
-        "aCrest": "https://crests.football-data.org/6684.png"
-      },
-      {
-        "id": 8,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-07-25",
-        "tm": "05:30",
-        "h": "Santos FC",
-        "a": "Chapecoense AF",
-        "hCn": "桑托斯",
-        "aCn": "沙佩科恩斯",
-        "hr": 15,
-        "ar": 20,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近1次桑托斯0胜0平1负 | 最近2026-01-28 客场 2-4",
-        "inj": "无关键伤停",
-        "fm": "主(LDLWD): 近5场1胜2平2负 | 客(WDDLD): 状态平稳，近5场1胜3平1负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/6685.png",
-        "aCrest": "https://crests.football-data.org/1772_large.png"
-      },
-      {
-        "id": 9,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -211,7 +165,7 @@
         "aCrest": "https://crests.football-data.org/4241.png"
       },
       {
-        "id": 10,
+        "id": 8,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -234,7 +188,7 @@
         "aCrest": "https://crests.football-data.org/1776.png"
       },
       {
-        "id": 11,
+        "id": 9,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "05:30",
@@ -257,7 +211,7 @@
         "aCrest": "https://crests.football-data.org/1765.png"
       },
       {
-        "id": 12,
+        "id": 10,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "06:30",
@@ -280,7 +234,7 @@
         "aCrest": "https://crests.football-data.org/1766.png"
       },
       {
-        "id": 13,
+        "id": 11,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-26",
         "tm": "06:30",
@@ -303,7 +257,7 @@
         "aCrest": "https://crests.football-data.org/1782.png"
       },
       {
-        "id": 14,
+        "id": 12,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-29",
         "tm": "06:30",
@@ -311,7 +265,7 @@
         "a": "CR Flamengo",
         "hCn": "巴西国际",
         "aCn": "弗拉门戈",
-        "hr": 14,
+        "hr": 15,
         "ar": 2,
         "odds": "待获取",
         "matchNum": "",
@@ -326,7 +280,7 @@
         "aCrest": "https://crests.football-data.org/1783.png"
       },
       {
-        "id": 15,
+        "id": 13,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-29",
         "tm": "06:30",
@@ -349,7 +303,7 @@
         "aCrest": "https://crests.football-data.org/4287.png"
       },
       {
-        "id": 16,
+        "id": 14,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-30",
         "tm": "06:30",
@@ -372,30 +326,7 @@
         "aCrest": "https://crests.football-data.org/1768.png"
       },
       {
-        "id": 17,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-07-25",
-        "tm": "07:30",
-        "h": "CR Vasco da Gama",
-        "a": "Mirassol FC",
-        "hCn": "瓦斯科达伽马",
-        "aCn": "米拉索尔",
-        "hr": 17,
-        "ar": 18,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近1次瓦斯科达伽马0胜0平1负 | 最近2026-01-29 客场 1-2",
-        "inj": "无关键伤停",
-        "fm": "主(LDLLW): 状态下滑，近5场1胜1平3负 | 客(WDDDL): 状态平稳，近5场1胜3平1负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/1780.png",
-        "aCrest": "https://crests.football-data.org/4364.png"
-      },
-      {
-        "id": 18,
+        "id": 15,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-29",
         "tm": "08:30",
@@ -418,7 +349,7 @@
         "aCrest": "https://crests.football-data.org/1777.png"
       },
       {
-        "id": 19,
+        "id": 16,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-07-29",
         "tm": "08:30",
@@ -686,5 +617,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 19
+  "_total_count": 16
 }
