@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-26 07:20",
+  "updated": "2026-07-26 12:49",
   "today": {
-    "date": "2026-07-25",
+    "date": "2026-07-26",
     "matches": [
       {
         "id": 1,
@@ -370,6 +370,29 @@
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1782.png",
         "aCrest": "https://crests.football-data.org/1769.png"
+      },
+      {
+        "id": 17,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-07-30",
+        "tm": "08:30",
+        "h": "Coritiba FBC",
+        "a": "Cruzeiro EC",
+        "hCn": "科里蒂巴",
+        "aCn": "克鲁塞罗",
+        "hr": 10,
+        "ar": 8,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次科里蒂巴1胜0平0负 | 最近2026-02-06 客场 2-1",
+        "inj": "无关键伤停",
+        "fm": "主(LWDLW): 近5场2胜1平2负 | 客(LLDDL): 状态下滑，近5场0胜2平3负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/4241.png",
+        "aCrest": "https://crests.football-data.org/1771.png"
       }
     ]
   },
@@ -617,5 +640,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 16
+  "_total_count": 17
 }
