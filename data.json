@@ -1,55 +1,8 @@
 {
-  "updated": "2026-07-30 21:56",
+  "updated": "2026-07-31 10:11",
   "today": {
     "date": "2026-07-30",
-    "matches": [
-      {
-        "id": 1,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-07-30",
-        "tm": "06:30",
-        "h": "SC Corinthians Paulista",
-        "a": "CA Paranaense",
-        "hCn": "科林蒂安",
-        "aCn": "巴拉纳竞技",
-        "hr": 9,
-        "ar": 3,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近6次科林蒂安4胜1平1负 | 最近2026-02-19 客场 1-0",
-        "inj": "无关键伤停",
-        "fm": "主(LWWDL): 近5场2胜1平2负 | 客(WWLDL): 近5场2胜1平2负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/1779.png",
-        "aCrest": "https://crests.football-data.org/1768.png"
-      },
-      {
-        "id": 2,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-07-30",
-        "tm": "08:30",
-        "h": "Coritiba FBC",
-        "a": "Cruzeiro EC",
-        "hCn": "科里蒂巴",
-        "aCn": "克鲁塞罗",
-        "hr": 10,
-        "ar": 11,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近1次科里蒂巴1胜0平0负 | 最近2026-02-06 客场 2-1",
-        "inj": "无关键伤停",
-        "fm": "主(LWDLW): 近5场2胜1平2负 | 客(LLDDL): 状态下滑，近5场0胜2平3负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/4241.png",
-        "aCrest": "https://crests.football-data.org/1771.png"
-      }
-    ]
+    "matches": []
   },
   "yesterday": {
     "date": "2026-07-20",
@@ -295,5 +248,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 2
+  "_total_count": 0
 }
