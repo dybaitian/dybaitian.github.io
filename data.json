@@ -1,8 +1,55 @@
 {
-  "updated": "2026-08-02 06:50",
+  "updated": "2026-08-02 12:44",
   "today": {
-    "date": "2026-08-01",
-    "matches": []
+    "date": "2026-08-02",
+    "matches": [
+      {
+        "id": 1,
+        "lg": "🇳🇱 荷甲",
+        "matchDay": "2026-08-07",
+        "tm": "02:00",
+        "h": "SC Cambuur-Leeuwarden",
+        "a": "SBV Excelsior",
+        "hCn": "SC Cambuur-Leeuwarden",
+        "aCn": "SBV Excelsior",
+        "hr": 1,
+        "ar": 1,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近期无交手记录",
+        "inj": "无关键伤停",
+        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1909.png",
+        "aCrest": "https://crests.football-data.org/670.png"
+      },
+      {
+        "id": 2,
+        "lg": "🇵🇹 葡超",
+        "matchDay": "2026-08-07",
+        "tm": "03:15",
+        "h": "GD Estoril Praia",
+        "a": "FC Famalicão",
+        "hCn": "GD Estoril Praia",
+        "aCn": "FC Famalicão",
+        "hr": 9,
+        "ar": 5,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近期无交手记录",
+        "inj": "无关键伤停",
+        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/582.png",
+        "aCrest": "https://crests.football-data.org/5531.png"
+      }
+    ]
   },
   "yesterday": {
     "date": "2026-07-20",
@@ -248,5 +295,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 0
+  "_total_count": 2
 }
