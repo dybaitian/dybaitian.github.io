@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08 19:49",
+  "updated": "2026-08-08 22:05",
   "today": {
     "date": "2026-08-08",
     "matches": [
@@ -13,7 +13,7 @@
         "hCn": "巴伊亚",
         "aCn": "瓦斯科达伽马",
         "hr": 5,
-        "ar": 18,
+        "ar": 19,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -36,7 +36,7 @@
         "hCn": "帕尔梅拉斯",
         "aCn": "巴西国际",
         "hr": 1,
-        "ar": 17,
+        "ar": 18,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -51,29 +51,6 @@
       },
       {
         "id": 3,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-08-08",
-        "tm": "05:30",
-        "h": "Clube do Remo",
-        "a": "CA Mineiro",
-        "hCn": "里莫",
-        "aCn": "米内罗竞技",
-        "hr": 19,
-        "ar": 10,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近2次里莫0胜1平1负 | 最近2026-02-11 客场 3-3",
-        "inj": "无关键伤停",
-        "fm": "主(LDDDL): 近5场0胜3平2负 | 客(DLDLW): 近5场1胜2平2负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/4287.png",
-        "aCrest": "https://crests.football-data.org/1766.png"
-      },
-      {
-        "id": 4,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-09",
         "tm": "05:30",
@@ -96,7 +73,7 @@
         "aCrest": "https://crests.football-data.org/1779.png"
       },
       {
-        "id": 5,
+        "id": 4,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-09",
         "tm": "05:30",
@@ -104,7 +81,7 @@
         "a": "CA Paranaense",
         "hCn": "桑托斯",
         "aCn": "巴拉纳竞技",
-        "hr": 16,
+        "hr": 17,
         "ar": 3,
         "odds": "待获取",
         "matchNum": "",
@@ -119,7 +96,7 @@
         "aCrest": "https://crests.football-data.org/1768.png"
       },
       {
-        "id": 6,
+        "id": 5,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-09",
         "tm": "06:30",
@@ -142,7 +119,7 @@
         "aCrest": "https://crests.football-data.org/1782.png"
       },
       {
-        "id": 7,
+        "id": 6,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-08",
         "tm": "07:30",
@@ -150,7 +127,7 @@
         "a": "Chapecoense AF",
         "hCn": "科里蒂巴",
         "aCn": "沙佩科恩斯",
-        "hr": 12,
+        "hr": 11,
         "ar": 20,
         "odds": "待获取",
         "matchNum": "",
@@ -165,7 +142,7 @@
         "aCrest": "https://crests.football-data.org/1772_large.png"
       },
       {
-        "id": 8,
+        "id": 7,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-08",
         "tm": "08:00",
@@ -188,7 +165,7 @@
         "aCrest": "https://crests.football-data.org/1765.png"
       },
       {
-        "id": 9,
+        "id": 8,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-09",
         "tm": "22:00",
@@ -197,7 +174,7 @@
         "hCn": "克鲁塞罗",
         "aCn": "米拉索尔",
         "hr": 7,
-        "ar": 14,
+        "ar": 16,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -456,5 +433,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 9
+  "_total_count": 8
 }
