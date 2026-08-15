@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-15 10:06",
+  "updated": "2026-08-15 13:55",
   "today": {
-    "date": "2026-08-14",
+    "date": "2026-08-15",
     "matches": [
       {
         "id": 1,
@@ -258,6 +258,29 @@
       },
       {
         "id": 12,
+        "lg": "🇪🇸 西甲",
+        "matchDay": "2026-08-20",
+        "tm": "03:00",
+        "h": "Rayo Vallecano de Madrid",
+        "a": "Deportivo Alavés",
+        "hCn": "Rayo Vallecano de Madrid",
+        "aCn": "Deportivo Alavés",
+        "hr": 1,
+        "ar": 1,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近期无交手记录",
+        "inj": "无关键伤停",
+        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/87.png",
+        "aCrest": "https://crests.football-data.org/263.png"
+      },
+      {
+        "id": 13,
         "lg": "🇳🇱 荷甲",
         "matchDay": "2026-08-15",
         "tm": "03:00",
@@ -280,7 +303,7 @@
         "aCrest": "https://crests.football-data.org/1909.png"
       },
       {
-        "id": 13,
+        "id": 14,
         "lg": "🏴 英冠",
         "matchDay": "2026-08-17",
         "tm": "03:00",
@@ -303,7 +326,7 @@
         "aCrest": "https://crests.football-data.org/404.png"
       },
       {
-        "id": 14,
+        "id": 15,
         "lg": "🇵🇹 葡超",
         "matchDay": "2026-08-17",
         "tm": "03:15",
@@ -326,7 +349,7 @@
         "aCrest": "https://crests.football-data.org/1903.png"
       },
       {
-        "id": 15,
+        "id": 16,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-08-15",
         "tm": "03:30",
@@ -349,7 +372,7 @@
         "aCrest": "https://crests.football-data.org/87.png"
       },
       {
-        "id": 16,
+        "id": 17,
         "lg": "🇵🇹 葡超",
         "matchDay": "2026-08-15",
         "tm": "03:30",
@@ -372,7 +395,7 @@
         "aCrest": "https://crests.football-data.org/503.png"
       },
       {
-        "id": 17,
+        "id": 18,
         "lg": "🇵🇹 葡超",
         "matchDay": "2026-08-16",
         "tm": "03:30",
@@ -395,7 +418,7 @@
         "aCrest": "https://crests.football-data.org/5575.png"
       },
       {
-        "id": 18,
+        "id": 19,
         "lg": "🇵🇹 葡超",
         "matchDay": "2026-08-16",
         "tm": "03:30",
@@ -418,7 +441,7 @@
         "aCrest": "https://crests.football-data.org/5533.png"
       },
       {
-        "id": 19,
+        "id": 20,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-16",
         "tm": "05:30",
@@ -441,7 +464,7 @@
         "aCrest": "https://crests.football-data.org/1783.png"
       },
       {
-        "id": 20,
+        "id": 21,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-16",
         "tm": "05:30",
@@ -464,7 +487,7 @@
         "aCrest": "https://crests.football-data.org/1770.png"
       },
       {
-        "id": 21,
+        "id": 22,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-16",
         "tm": "06:30",
@@ -487,7 +510,7 @@
         "aCrest": "https://crests.football-data.org/1771.png"
       },
       {
-        "id": 22,
+        "id": 23,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-17",
         "tm": "07:00",
@@ -510,7 +533,7 @@
         "aCrest": "https://crests.football-data.org/4287.png"
       },
       {
-        "id": 23,
+        "id": 24,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-15",
         "tm": "08:00",
@@ -533,7 +556,7 @@
         "aCrest": "https://crests.football-data.org/4241.png"
       },
       {
-        "id": 24,
+        "id": 25,
         "lg": "🇳🇱 荷甲",
         "matchDay": "2026-08-16",
         "tm": "18:15",
@@ -554,29 +577,6 @@
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/680.png",
         "aCrest": "https://crests.football-data.org/677.png"
-      },
-      {
-        "id": 25,
-        "lg": "🏴 英冠",
-        "matchDay": "2026-08-15",
-        "tm": "19:30",
-        "h": "Bolton Wanderers FC",
-        "a": "Preston North End FC",
-        "hCn": "Bolton Wanderers FC",
-        "aCn": "Preston North End FC",
-        "hr": 3,
-        "ar": 3,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近期无交手记录",
-        "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/60.png",
-        "aCrest": "https://crests.football-data.org/1081.png"
       },
       {
         "id": 26,
