@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-17 03:32",
+  "updated": "2026-08-17 08:13",
   "today": {
     "date": "2026-08-16",
     "matches": [
@@ -163,6 +163,52 @@
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/715.png",
         "aCrest": "https://crests.football-data.org/404.png"
+      },
+      {
+        "id": 8,
+        "lg": "🇵🇹 葡超",
+        "matchDay": "2026-08-17",
+        "tm": "03:15",
+        "h": "Casa Pia AC",
+        "a": "Sport Lisboa e Benfica",
+        "hCn": "Casa Pia AC",
+        "aCn": "Sport Lisboa e Benfica",
+        "hr": 16,
+        "ar": 9,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近期无交手记录",
+        "inj": "无关键伤停",
+        "fm": "主(L): 近1场0胜0平1负 | 客(D): 近1场0胜1平0负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/6618.png",
+        "aCrest": "https://crests.football-data.org/1903.png"
+      },
+      {
+        "id": 9,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-08-17",
+        "tm": "07:00",
+        "h": "SC Internacional",
+        "a": "Clube do Remo",
+        "hCn": "巴西国际",
+        "aCn": "里莫",
+        "hr": 17,
+        "ar": 18,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次巴西国际0胜1平0负 | 最近2026-02-25 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(LDLDL): 状态下滑，近5场0胜2平3负 | 客(LDDDL): 近5场0胜3平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/6684.png",
+        "aCrest": "https://crests.football-data.org/4287.png"
       }
     ]
   },
@@ -410,5 +456,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 7
+  "_total_count": 9
 }
