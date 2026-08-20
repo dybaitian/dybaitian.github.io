@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-20 02:07",
+  "updated": "2026-08-20 04:14",
   "today": {
     "date": "2026-08-19",
     "matches": [
@@ -1008,9 +1008,9 @@
         "isLottery": false,
         "handicap": "",
         "odds_hhad": "",
-        "h2h": "近3次克鲁塞罗0胜2平1负 | 最近2026-03-12 客场 0-2",
+        "h2h": "近4次克鲁塞罗0胜2平2负 ⚠️0胜魔咒! | 最近2026-03-12 客场 0-2",
         "inj": "无关键伤停",
-        "fm": "主(LLDDL): 状态下滑，近5场0胜2平3负 | 客(LDWWW): 状态良好，近5场3胜1平1负",
+        "fm": "主(LDDLD): 近5场0胜3平2负 | 客(LDWWW): 状态良好，近5场3胜1平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1771.png",
         "aCrest": "https://crests.football-data.org/1783.png"
