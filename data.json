@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24 04:08",
+  "updated": "2026-08-24 07:22",
   "today": {
     "date": "2026-08-23",
     "matches": [
@@ -196,8 +196,8 @@
         "a": "Paris Saint-Germain FC",
         "hCn": "Lille OSC",
         "aCn": "Paris Saint-Germain FC",
-        "hr": 1,
-        "ar": 1,
+        "hr": 3,
+        "ar": 6,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -334,8 +334,8 @@
         "a": "Birmingham City FC",
         "hCn": "Wrexham AFC",
         "aCn": "Birmingham City FC",
-        "hr": 14,
-        "ar": 14,
+        "hr": 13,
+        "ar": 13,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
