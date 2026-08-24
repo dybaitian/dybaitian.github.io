@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-24 19:05",
+  "updated": "2026-08-24 21:50",
   "today": {
     "date": "2026-08-24",
     "matches": [
@@ -13,7 +13,7 @@
         "hCn": "Tottenham Hotspur FC",
         "aCn": "Newcastle United FC",
         "hr": 18,
-        "ar": 9,
+        "ar": 10,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -58,8 +58,8 @@
         "a": "Torino FC",
         "hCn": "US Sassuolo Calcio",
         "aCn": "Torino FC",
-        "hr": 13,
-        "ar": 13,
+        "hr": 12,
+        "ar": 12,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -81,8 +81,8 @@
         "a": "Udinese Calcio",
         "hCn": "AC Monza",
         "aCn": "Udinese Calcio",
-        "hr": 20,
-        "ar": 9,
+        "hr": 19,
+        "ar": 10,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -104,8 +104,8 @@
         "a": "Frosinone Calcio",
         "hCn": "ACF Fiorentina",
         "aCn": "Frosinone Calcio",
-        "hr": 11,
-        "ar": 15,
+        "hr": 20,
+        "ar": 14,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -113,7 +113,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(L): 近1场0胜0平1负",
+        "fm": "主(L): 近1场0胜0平1负 | 客(L): 近1场0胜0平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/99.png",
         "aCrest": "https://crests.football-data.org/470.png"
@@ -128,7 +128,7 @@
         "hCn": "Real Racing Club de Santander",
         "aCn": "Elche CF",
         "hr": 14,
-        "ar": 17,
+        "ar": 18,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -150,7 +150,7 @@
         "a": "RCD Espanyol de Barcelona",
         "hCn": "Real Sociedad de Fútbol",
         "aCn": "RCD Espanyol de Barcelona",
-        "hr": 18,
+        "hr": 19,
         "ar": 5,
         "odds": "待获取",
         "matchNum": "",
@@ -205,7 +205,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(D): 近1场0胜1平0负 | 客(): 近0场0胜0平0负",
+        "fm": "主(D): 近1场0胜1平0负 | 客(D): 近1场0胜1平0负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/558.png",
         "aCrest": "https://crests.football-data.org/79.png"
@@ -219,8 +219,8 @@
         "a": "Venezia FC",
         "hCn": "AC Milan",
         "aCn": "Venezia FC",
-        "hr": 4,
-        "ar": 18,
+        "hr": 5,
+        "ar": 17,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -242,8 +242,8 @@
         "a": "Parma Calcio 1913",
         "hCn": "Juventus FC",
         "aCn": "Parma Calcio 1913",
-        "hr": 6,
-        "ar": 15,
+        "hr": 7,
+        "ar": 14,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -374,29 +374,6 @@
       {
         "id": 17,
         "lg": "🏴 英超",
-        "matchDay": "2026-08-24",
-        "tm": "03:00",
-        "h": "Fulham FC",
-        "a": "Chelsea FC",
-        "hCn": "Fulham FC",
-        "aCn": "Chelsea FC",
-        "hr": 11,
-        "ar": 11,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近期无交手记录",
-        "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/63.png",
-        "aCrest": "https://crests.football-data.org/61.png"
-      },
-      {
-        "id": 18,
-        "lg": "🏴 英超",
         "matchDay": "2026-08-28",
         "tm": "03:00",
         "h": "Crystal Palace FC",
@@ -404,7 +381,7 @@
         "hCn": "Crystal Palace FC",
         "aCn": "Manchester City FC",
         "hr": 16,
-        "ar": 6,
+        "ar": 7,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -418,7 +395,7 @@
         "aCrest": "https://crests.football-data.org/65.png"
       },
       {
-        "id": 19,
+        "id": 18,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-08-25",
         "tm": "03:00",
@@ -441,7 +418,7 @@
         "aCrest": "https://crests.football-data.org/90.png"
       },
       {
-        "id": 20,
+        "id": 19,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-08-26",
         "tm": "03:00",
@@ -450,7 +427,7 @@
         "hCn": "Real Madrid CF",
         "aCn": "Real Sociedad de Fútbol",
         "hr": 6,
-        "ar": 18,
+        "ar": 19,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -464,7 +441,7 @@
         "aCrest": "https://crests.football-data.org/92.png"
       },
       {
-        "id": 21,
+        "id": 20,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-08-27",
         "tm": "03:00",
@@ -473,7 +450,7 @@
         "hCn": "FC Barcelona",
         "aCn": "Athletic Club",
         "hr": 4,
-        "ar": 19,
+        "ar": 20,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -487,30 +464,7 @@
         "aCrest": "https://crests.football-data.org/77.png"
       },
       {
-        "id": 22,
-        "lg": "🇪🇸 西甲",
-        "matchDay": "2026-08-24",
-        "tm": "03:30",
-        "h": "Málaga CF",
-        "a": "RC Deportivo La Coruña",
-        "hCn": "Málaga CF",
-        "aCn": "RC Deportivo La Coruña",
-        "hr": 20,
-        "ar": 10,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近期无交手记录",
-        "inj": "无关键伤停",
-        "fm": "主(L): 近1场0胜0平1负 | 客(D): 近1场0胜1平0负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/84.png",
-        "aCrest": "https://crests.football-data.org/560.png"
-      },
-      {
-        "id": 23,
+        "id": 21,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-08-28",
         "tm": "03:30",
@@ -533,7 +487,7 @@
         "aCrest": "https://crests.football-data.org/94.png"
       },
       {
-        "id": 24,
+        "id": 22,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-08-29",
         "tm": "03:30",
@@ -556,7 +510,7 @@
         "aCrest": "https://crests.football-data.org/78.png"
       },
       {
-        "id": 25,
+        "id": 23,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-29",
         "tm": "05:30",
@@ -579,7 +533,7 @@
         "aCrest": "https://crests.football-data.org/1782.png"
       },
       {
-        "id": 26,
+        "id": 24,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-24",
         "tm": "07:00",
@@ -602,7 +556,7 @@
         "aCrest": "https://crests.football-data.org/1768.png"
       },
       {
-        "id": 27,
+        "id": 25,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-08-29",
         "tm": "07:00",
@@ -625,7 +579,7 @@
         "aCrest": "https://crests.football-data.org/4286.png"
       },
       {
-        "id": 28,
+        "id": 26,
         "lg": "🏴 英超",
         "matchDay": "2026-08-29",
         "tm": "19:30",
@@ -633,7 +587,7 @@
         "a": "Nottingham Forest FC",
         "hCn": "Liverpool FC",
         "aCn": "Nottingham Forest FC",
-        "hr": 9,
+        "hr": 10,
         "ar": 15,
         "odds": "待获取",
         "matchNum": "",
@@ -648,7 +602,7 @@
         "aCrest": "https://crests.football-data.org/351.png"
       },
       {
-        "id": 29,
+        "id": 27,
         "lg": "🇩🇪 德甲",
         "matchDay": "2026-08-29",
         "tm": "21:30",
@@ -671,7 +625,7 @@
         "aCrest": "https://crests.football-data.org/18.png"
       },
       {
-        "id": 30,
+        "id": 28,
         "lg": "🇩🇪 德甲",
         "matchDay": "2026-08-29",
         "tm": "21:30",
@@ -694,7 +648,7 @@
         "aCrest": "https://crests.football-data.org/29.png"
       },
       {
-        "id": 31,
+        "id": 29,
         "lg": "🇩🇪 德甲",
         "matchDay": "2026-08-29",
         "tm": "21:30",
@@ -717,7 +671,7 @@
         "aCrest": "https://crests.football-data.org/19.png"
       },
       {
-        "id": 32,
+        "id": 30,
         "lg": "🇩🇪 德甲",
         "matchDay": "2026-08-29",
         "tm": "21:30",
@@ -740,7 +694,7 @@
         "aCrest": "https://crests.football-data.org/3.png"
       },
       {
-        "id": 33,
+        "id": 31,
         "lg": "🇩🇪 德甲",
         "matchDay": "2026-08-29",
         "tm": "21:30",
@@ -763,7 +717,7 @@
         "aCrest": "https://crests.football-data.org/2.png"
       },
       {
-        "id": 34,
+        "id": 32,
         "lg": "🏴 英超",
         "matchDay": "2026-08-29",
         "tm": "22:00",
@@ -786,7 +740,7 @@
         "aCrest": "https://crests.football-data.org/62.png"
       },
       {
-        "id": 35,
+        "id": 33,
         "lg": "🏴 英超",
         "matchDay": "2026-08-29",
         "tm": "22:00",
@@ -809,7 +763,7 @@
         "aCrest": "https://crests.football-data.org/322.png"
       },
       {
-        "id": 36,
+        "id": 34,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-08-29",
         "tm": "23:00",
@@ -817,7 +771,7 @@
         "a": "Real Betis Balompié",
         "hCn": "Levante UD",
         "aCn": "Real Betis Balompié",
-        "hr": 16,
+        "hr": 17,
         "ar": 7,
         "odds": "待获取",
         "matchNum": "",
@@ -826,13 +780,13 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(L): 近1场0胜0平1负 | 客(W): 近1场1胜0平0负",
+        "fm": "主(LD): 近2场0胜1平1负 | 客(W): 近1场1胜0平0负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/88.png",
         "aCrest": "https://crests.football-data.org/90.png"
       },
       {
-        "id": 37,
+        "id": 35,
         "lg": "🇫🇷 法甲",
         "matchDay": "2026-08-29",
         "tm": "23:15",
@@ -1100,5 +1054,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 37
+  "_total_count": 35
 }
