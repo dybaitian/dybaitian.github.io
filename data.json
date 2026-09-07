@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-06 23:00",
+  "updated": "2026-09-07 04:37",
   "today": {
     "date": "2026-09-06",
     "matches": [
@@ -634,7 +634,7 @@
         "hCn": "弗拉门戈",
         "aCn": "科林蒂安",
         "hr": 1,
-        "ar": 10,
+        "ar": 11,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -642,7 +642,7 @@
         "odds_hhad": "",
         "h2h": "近1次弗拉门戈0胜1平0负 | 最近2026-03-22 客场 1-1",
         "inj": "无关键伤停",
-        "fm": "主(WWWDL): 状态良好，近5场3胜1平1负 | 客(DLDDD): 状态平稳，近5场0胜4平1负",
+        "fm": "主(WWWDL): 状态良好，近5场3胜1平1负 | 客(LDDDL): 近5场0胜3平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1783.png",
         "aCrest": "https://crests.football-data.org/1779.png"
