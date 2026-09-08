@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-08 21:25",
+  "updated": "2026-09-08 23:42",
   "today": {
     "date": "2026-09-08",
     "matches": [
@@ -274,7 +274,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(WDWL): 近4场2胜1平1负 | 客(WWLLD): 近5场2胜1平2负",
+        "fm": "主(WDWLD): 状态平稳，近5场2胜2平1负 | 客(WWLLD): 近5场2胜1平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/718.png",
         "aCrest": "https://crests.football-data.org/677.png"
@@ -1217,7 +1217,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(WLWWD): 状态良好，近5场3胜1平1负 | 客(LLDL): 状态下滑，近4场0胜1平3负",
+        "fm": "主(WLWWD): 状态良好，近5场3胜1平1负 | 客(LLDLD): 状态下滑，近5场0胜2平3负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/670.png",
         "aCrest": "https://crests.football-data.org/676.png"
