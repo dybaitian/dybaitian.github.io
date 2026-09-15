@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15 12:00",
+  "updated": "2026-09-15 17:14",
   "today": {
     "date": "2026-09-15",
     "matches": [
@@ -104,7 +104,7 @@
         "a": "Real Racing Club de Santander",
         "hCn": "RC Celta de Vigo",
         "aCn": "Real Racing Club de Santander",
-        "hr": 15,
+        "hr": 16,
         "ar": 10,
         "odds": "待获取",
         "matchNum": "",
@@ -196,7 +196,7 @@
         "a": "RCD Espanyol de Barcelona",
         "hCn": "Rayo Vallecano de Madrid",
         "aCn": "RCD Espanyol de Barcelona",
-        "hr": 16,
+        "hr": 15,
         "ar": 8,
         "odds": "待获取",
         "matchNum": "",
@@ -1416,7 +1416,7 @@
         "hCn": "CA Osasuna",
         "aCn": "Rayo Vallecano de Madrid",
         "hr": 11,
-        "ar": 16,
+        "ar": 15,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
