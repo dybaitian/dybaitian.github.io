@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-15 21:38",
+  "updated": "2026-09-16 05:05",
   "today": {
     "date": "2026-09-15",
     "matches": [
@@ -150,7 +150,7 @@
         "a": "Levante UD",
         "hCn": "Villarreal CF",
         "aCn": "Levante UD",
-        "hr": 20,
+        "hr": 19,
         "ar": 14,
         "odds": "待获取",
         "matchNum": "",
@@ -665,7 +665,7 @@
         "odds_hhad": "",
         "h2h": "近1次科林蒂安0胜0平1负 | 最近2026-04-02 客场 1-3",
         "inj": "无关键伤停",
-        "fm": "主(DDLLW): 近5场1胜2平2负 | 客(LWWDD): 状态平稳，近5场2胜2平1负",
+        "fm": "主(DDLLW): 近5场1胜2平2负 | 客(WWDDL): 状态平稳，近5场2胜2平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1779.png",
         "aCrest": "https://crests.football-data.org/1765.png"
@@ -726,7 +726,7 @@
         "hCn": "RCD Espanyol de Barcelona",
         "aCn": "Elche CF",
         "hr": 8,
-        "ar": 19,
+        "ar": 20,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -887,7 +887,7 @@
         "hCn": "Málaga CF",
         "aCn": "Villarreal CF",
         "hr": 18,
-        "ar": 20,
+        "ar": 19,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
