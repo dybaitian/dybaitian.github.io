@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-17 11:56",
+  "updated": "2026-09-17 17:16",
   "today": {
     "date": "2026-09-17",
     "matches": [
@@ -151,7 +151,7 @@
         "hCn": "Villarreal CF",
         "aCn": "Levante UD",
         "hr": 19,
-        "ar": 14,
+        "ar": 15,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -197,7 +197,7 @@
         "hCn": "Real Betis Balompié",
         "aCn": "Getafe CF",
         "hr": 5,
-        "ar": 15,
+        "ar": 14,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -1185,7 +1185,7 @@
         "a": "Málaga CF",
         "hCn": "Getafe CF",
         "aCn": "Málaga CF",
-        "hr": 15,
+        "hr": 14,
         "ar": 18,
         "odds": "待获取",
         "matchNum": "",
