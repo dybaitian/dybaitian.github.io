@@ -1,8 +1,32 @@
 {
-  "updated": "2026-09-27 05:13",
+  "updated": "2026-09-27 11:58",
   "today": {
-    "date": "2026-09-26",
-    "matches": []
+    "date": "2026-09-27",
+    "matches": [
+      {
+        "id": 1,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-10-02",
+        "tm": "07:00",
+        "h": "São Paulo FC",
+        "a": "Santos FC",
+        "hCn": "圣保罗",
+        "aCn": "桑托斯",
+        "hr": 11,
+        "ar": 8,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次圣保罗0胜1平0负 | 最近2026-02-04 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(WDWWW): 状态火爆，近5场4胜1平0负，主场强势 | 客(LDLWD): 近5场1胜2平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1776.png",
+        "aCrest": "https://crests.football-data.org/6685.png"
+      }
+    ]
   },
   "yesterday": {
     "date": "2026-07-20",
@@ -248,5 +272,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 0
+  "_total_count": 1
 }
