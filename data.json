@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08 01:19",
+  "updated": "2026-10-08 10:49",
   "today": {
     "date": "2026-10-07",
     "matches": [
@@ -573,7 +573,7 @@
         "odds_hhad": "",
         "h2h": "近1次科里蒂巴0胜1平0负 | 最近2026-04-12 客场 2-2",
         "inj": "无关键伤停",
-        "fm": "主(LWDLW): 近5场2胜1平2负 | 客(LLWDL): 状态下滑，近5场1胜1平3负",
+        "fm": "主(LWDLW): 近5场2胜1平2负 | 客(LWDLL): 状态下滑，近5场1胜1平3负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/4241.png",
         "aCrest": "https://crests.football-data.org/1770.png"
@@ -841,7 +841,7 @@
         "hCn": "弗拉门戈",
         "aCn": "弗鲁米嫩塞",
         "hr": 1,
-        "ar": 4,
+        "ar": 5,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -1048,7 +1048,7 @@
         "hCn": "布拉甘蒂诺红牛",
         "aCn": "克鲁塞罗",
         "hr": 10,
-        "ar": 5,
+        "ar": 4,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -1056,7 +1056,7 @@
         "odds_hhad": "",
         "h2h": "近1次布拉甘蒂诺红牛0胜0平1负 | 最近2026-04-12 客场 1-2",
         "inj": "无关键伤停",
-        "fm": "主(WWLDD): 状态平稳，近5场2胜2平1负 | 客(LDWLW): 近5场2胜1平2负",
+        "fm": "主(WWLDD): 状态平稳，近5场2胜2平1负 | 客(DWLWW): 状态良好，近5场3胜1平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/4286.png",
         "aCrest": "https://crests.football-data.org/1771.png"
@@ -1070,7 +1070,7 @@
         "a": "Coritiba FBC",
         "hCn": "弗鲁米嫩塞",
         "aCn": "科里蒂巴",
-        "hr": 4,
+        "hr": 5,
         "ar": 9,
         "odds": "待获取",
         "matchNum": "",
