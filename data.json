@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-14 21:59",
+  "updated": "2026-10-15 04:48",
   "today": {
     "date": "2026-10-14",
     "matches": [
@@ -481,7 +481,7 @@
         "odds_hhad": "",
         "h2h": "近1次弗鲁米嫩塞1胜0平0负 | 最近2026-04-19 客场 3-2",
         "inj": "无关键伤停",
-        "fm": "主(DLLWW): 近5场2胜1平2负 | 客(LDLWD): 近5场1胜2平2负",
+        "fm": "主(LLWWL): 状态下滑，近5场2胜0平3负 | 客(LDLWD): 近5场1胜2平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1765.png",
         "aCrest": "https://crests.football-data.org/6685.png"
@@ -780,7 +780,7 @@
         "odds_hhad": "",
         "h2h": "近1次巴拉纳竞技0胜0平1负 | 最近2026-04-19 客场 0-1",
         "inj": "无关键伤停",
-        "fm": "主(WWLDL): 近5场2胜1平2负 | 客(DDWWW): 状态良好，近5场3胜2平0负",
+        "fm": "主(WWLDL): 近5场2胜1平2负 | 客(DWWWD): 状态良好，近5场3胜2平0负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1768.png",
         "aCrest": "https://crests.football-data.org/1769.png"
