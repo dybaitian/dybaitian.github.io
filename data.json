@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-18 20:44",
+  "updated": "2026-10-18 23:13",
   "today": {
     "date": "2026-10-18",
     "matches": [
@@ -236,29 +236,6 @@
       {
         "id": 11,
         "lg": "🇫🇷 法甲",
-        "matchDay": "2026-10-18",
-        "tm": "02:45",
-        "h": "Olympique Lyonnais",
-        "a": "OGC Nice",
-        "hCn": "Olympique Lyonnais",
-        "aCn": "OGC Nice",
-        "hr": 1,
-        "ar": 13,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近期无交手记录",
-        "inj": "无关键伤停",
-        "fm": "主(WDWDW): 状态良好，近5场3胜2平0负 | 客(DLDLW): 近5场1胜2平2负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/523.png",
-        "aCrest": "https://crests.football-data.org/522.png"
-      },
-      {
-        "id": 12,
-        "lg": "🇫🇷 法甲",
         "matchDay": "2026-10-23",
         "tm": "02:45",
         "h": "Stade Brestois 29",
@@ -280,7 +257,7 @@
         "aCrest": "https://crests.football-data.org/522.png"
       },
       {
-        "id": 13,
+        "id": 12,
         "lg": "🏴 英冠",
         "matchDay": "2026-10-20",
         "tm": "02:45",
@@ -303,7 +280,7 @@
         "aCrest": "https://crests.football-data.org/325.png"
       },
       {
-        "id": 14,
+        "id": 13,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-20",
         "tm": "03:00",
@@ -326,7 +303,7 @@
         "aCrest": "https://crests.football-data.org/1899.png"
       },
       {
-        "id": 15,
+        "id": 14,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-20",
         "tm": "03:00",
@@ -349,7 +326,7 @@
         "aCrest": "https://crests.football-data.org/78.png"
       },
       {
-        "id": 16,
+        "id": 15,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-20",
         "tm": "03:00",
@@ -372,7 +349,7 @@
         "aCrest": "https://crests.football-data.org/94.png"
       },
       {
-        "id": 17,
+        "id": 16,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-20",
         "tm": "03:00",
@@ -395,7 +372,7 @@
         "aCrest": "https://crests.football-data.org/7509.png"
       },
       {
-        "id": 18,
+        "id": 17,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-20",
         "tm": "03:00",
@@ -418,7 +395,7 @@
         "aCrest": "https://crests.football-data.org/674.png"
       },
       {
-        "id": 19,
+        "id": 18,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-20",
         "tm": "03:00",
@@ -441,7 +418,7 @@
         "aCrest": "https://crests.football-data.org/5721.png"
       },
       {
-        "id": 20,
+        "id": 19,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-20",
         "tm": "03:00",
@@ -464,7 +441,7 @@
         "aCrest": "https://crests.football-data.org/81.png"
       },
       {
-        "id": 21,
+        "id": 20,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-21",
         "tm": "03:00",
@@ -487,7 +464,7 @@
         "aCrest": "https://crests.football-data.org/721.png"
       },
       {
-        "id": 22,
+        "id": 21,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-21",
         "tm": "03:00",
@@ -510,7 +487,7 @@
         "aCrest": "https://crests.football-data.org/1887.png"
       },
       {
-        "id": 23,
+        "id": 22,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-21",
         "tm": "03:00",
@@ -533,7 +510,7 @@
         "aCrest": "https://crests.football-data.org/57.png"
       },
       {
-        "id": 24,
+        "id": 23,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-21",
         "tm": "03:00",
@@ -556,7 +533,7 @@
         "aCrest": "https://crests.football-data.org/546.png"
       },
       {
-        "id": 25,
+        "id": 24,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-21",
         "tm": "03:00",
@@ -579,7 +556,7 @@
         "aCrest": "https://crests.football-data.org/5720.png"
       },
       {
-        "id": 26,
+        "id": 25,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-21",
         "tm": "03:00",
@@ -602,7 +579,7 @@
         "aCrest": "https://crests.football-data.org/2016.png"
       },
       {
-        "id": 27,
+        "id": 26,
         "lg": "🏆 欧冠",
         "matchDay": "2026-10-21",
         "tm": "03:00",
@@ -625,7 +602,7 @@
         "aCrest": "https://crests.football-data.org/675.png"
       },
       {
-        "id": 28,
+        "id": 27,
         "lg": "🏴 英超",
         "matchDay": "2026-10-19",
         "tm": "03:00",
@@ -648,7 +625,7 @@
         "aCrest": "https://crests.football-data.org/1076.png"
       },
       {
-        "id": 29,
+        "id": 28,
         "lg": "🏴 英超",
         "matchDay": "2026-10-23",
         "tm": "03:00",
@@ -671,7 +648,7 @@
         "aCrest": "https://crests.football-data.org/351.png"
       },
       {
-        "id": 30,
+        "id": 29,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-10-19",
         "tm": "03:00",
@@ -694,7 +671,7 @@
         "aCrest": "https://crests.football-data.org/87.png"
       },
       {
-        "id": 31,
+        "id": 30,
         "lg": "🇪🇸 西甲",
         "matchDay": "2026-10-23",
         "tm": "03:00",
@@ -717,7 +694,7 @@
         "aCrest": "https://crests.football-data.org/84.png"
       },
       {
-        "id": 32,
+        "id": 31,
         "lg": "🏴 英冠",
         "matchDay": "2026-10-23",
         "tm": "03:00",
@@ -740,7 +717,7 @@
         "aCrest": "https://crests.football-data.org/343.png"
       },
       {
-        "id": 33,
+        "id": 32,
         "lg": "🇵🇹 葡超",
         "matchDay": "2026-10-19",
         "tm": "03:15",
@@ -763,7 +740,7 @@
         "aCrest": "https://crests.football-data.org/5533.png"
       },
       {
-        "id": 34,
+        "id": 33,
         "lg": "🇵🇹 葡超",
         "matchDay": "2026-10-23",
         "tm": "03:45",
@@ -786,53 +763,7 @@
         "aCrest": "https://crests.football-data.org/5575.png"
       },
       {
-        "id": 35,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-10-18",
-        "tm": "05:30",
-        "h": "EC Bahia",
-        "a": "CR Flamengo",
-        "hCn": "巴伊亚",
-        "aCn": "弗拉门戈",
-        "hr": 7,
-        "ar": 2,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近3次巴伊亚1胜1平1负 | 最近2026-02-12 客场 1-0",
-        "inj": "无关键伤停",
-        "fm": "主(WLDDW): 状态平稳，近5场2胜2平1负 | 客(WWWWD): 状态火爆，近5场4胜1平0负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/1777.png",
-        "aCrest": "https://crests.football-data.org/1783.png"
-      },
-      {
-        "id": 36,
-        "lg": "🇧🇷 巴甲",
-        "matchDay": "2026-10-18",
-        "tm": "06:30",
-        "h": "Clube do Remo",
-        "a": "RB Bragantino",
-        "hCn": "里莫",
-        "aCn": "布拉甘蒂诺红牛",
-        "hr": 19,
-        "ar": 10,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近1次里莫0胜0平1负 | 最近2026-04-19 客场 2-4",
-        "inj": "无关键伤停",
-        "fm": "主(LDDDL): 近5场0胜3平2负 | 客(WWLDD): 状态平稳，近5场2胜2平1负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/4287.png",
-        "aCrest": "https://crests.football-data.org/4286.png"
-      },
-      {
-        "id": 37,
+        "id": 34,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-10-19",
         "tm": "07:00",
@@ -855,7 +786,7 @@
         "aCrest": "https://crests.football-data.org/1782.png"
       },
       {
-        "id": 38,
+        "id": 35,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-10-23",
         "tm": "07:00",
@@ -872,7 +803,7 @@
         "odds_hhad": "",
         "h2h": "近1次克鲁塞罗1胜0平0负 | 最近2026-04-25 客场 1-0",
         "inj": "无关键伤停",
-        "fm": "主(WLWWL): 状态良好，近5场3胜0平2负 | 客(LDDDL): 近5场0胜3平2负",
+        "fm": "主(LWWLW): 状态良好，近5场3胜0平2负 | 客(LDDDL): 近5场0胜3平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1771.png",
         "aCrest": "https://crests.football-data.org/4287.png"
@@ -1123,5 +1054,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 38
+  "_total_count": 35
 }
