@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20 00:35",
+  "updated": "2026-10-20 08:44",
   "today": {
     "date": "2026-10-19",
     "matches": [
@@ -864,7 +864,7 @@
         "hCn": "巴西国际",
         "aCn": "博塔弗戈",
         "hr": 17,
-        "ar": 12,
+        "ar": 11,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -909,7 +909,7 @@
         "a": "CA Paranaense",
         "hCn": "维多利亚",
         "aCn": "巴拉纳竞技",
-        "hr": 11,
+        "hr": 13,
         "ar": 3,
         "odds": "待获取",
         "matchNum": "",
@@ -918,7 +918,7 @@
         "odds_hhad": "",
         "h2h": "近3次维多利亚1胜0平2负 | 最近2026-03-14 主场 2-0",
         "inj": "无关键伤停",
-        "fm": "主(WLLDW): 近5场2胜1平2负 | 客(WLDLW): 近5场2胜1平2负",
+        "fm": "主(LLDWL): 状态下滑，近5场1胜1平3负 | 客(WLDLW): 近5场2胜1平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1782.png",
         "aCrest": "https://crests.football-data.org/1768.png"
@@ -1010,7 +1010,7 @@
         "odds_hhad": "",
         "h2h": "近1次瓦斯科达伽马0胜0平1负 | 最近2026-04-26 客场 0-1",
         "inj": "无关键伤停",
-        "fm": "主(LDLLW): 状态下滑，近5场1胜1平3负 | 客(WDWDW): 状态良好，近5场3胜2平0负",
+        "fm": "主(LDLLW): 状态下滑，近5场1胜1平3负 | 客(DWDWW): 状态良好，近5场3胜2平0负，主场强势",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1780.png",
         "aCrest": "https://crests.football-data.org/1779.png"
