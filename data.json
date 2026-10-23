@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23 11:53",
+  "updated": "2026-10-23 17:21",
   "today": {
     "date": "2026-10-23",
     "matches": [
@@ -856,6 +856,29 @@
       },
       {
         "id": 38,
+        "lg": "🇫🇷 法甲",
+        "matchDay": "2026-10-26",
+        "tm": "03:30",
+        "h": "Paris Saint-Germain FC",
+        "a": "Olympique Lyonnais",
+        "hCn": "Paris Saint-Germain FC",
+        "aCn": "Olympique Lyonnais",
+        "hr": 2,
+        "ar": 1,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近期无交手记录",
+        "inj": "无关键伤停",
+        "fm": "主(DDLWW): 状态平稳，近5场2胜2平1负 | 客(WDWDW): 状态良好，近5场3胜2平0负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/524.png",
+        "aCrest": "https://crests.football-data.org/523.png"
+      },
+      {
+        "id": 39,
         "lg": "🇵🇹 葡超",
         "matchDay": "2026-10-24",
         "tm": "03:30",
@@ -878,7 +901,7 @@
         "aCrest": "https://crests.football-data.org/503.png"
       },
       {
-        "id": 39,
+        "id": 40,
         "lg": "🇮🇹 意甲",
         "matchDay": "2026-10-25",
         "tm": "03:45",
@@ -901,7 +924,7 @@
         "aCrest": "https://crests.football-data.org/98.png"
       },
       {
-        "id": 40,
+        "id": 41,
         "lg": "🇮🇹 意甲",
         "matchDay": "2026-10-27",
         "tm": "03:45",
@@ -924,7 +947,7 @@
         "aCrest": "https://crests.football-data.org/104.png"
       },
       {
-        "id": 41,
+        "id": 42,
         "lg": "🇮🇹 意甲",
         "matchDay": "2026-10-27",
         "tm": "03:45",
@@ -947,7 +970,7 @@
         "aCrest": "https://crests.football-data.org/7397.png"
       },
       {
-        "id": 42,
+        "id": 43,
         "lg": "🇮🇹 意甲",
         "matchDay": "2026-10-28",
         "tm": "03:45",
@@ -970,7 +993,7 @@
         "aCrest": "https://crests.football-data.org/109.png"
       },
       {
-        "id": 43,
+        "id": 44,
         "lg": "🇮🇹 意甲",
         "matchDay": "2026-10-28",
         "tm": "03:45",
@@ -991,29 +1014,6 @@
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/5911.png",
         "aCrest": "https://crests.football-data.org/113.png"
-      },
-      {
-        "id": 44,
-        "lg": "🇫🇷 法甲",
-        "matchDay": "2026-10-25",
-        "tm": "03:45",
-        "h": "Paris Saint-Germain FC",
-        "a": "Olympique Lyonnais",
-        "hCn": "Paris Saint-Germain FC",
-        "aCn": "Olympique Lyonnais",
-        "hr": 2,
-        "ar": 1,
-        "odds": "待获取",
-        "matchNum": "",
-        "isLottery": false,
-        "handicap": "",
-        "odds_hhad": "",
-        "h2h": "近期无交手记录",
-        "inj": "无关键伤停",
-        "fm": "主(DDLWW): 状态平稳，近5场2胜2平1负 | 客(WDWDW): 状态良好，近5场3胜2平0负",
-        "xp": "football-data.org",
-        "hCrest": "https://crests.football-data.org/524.png",
-        "aCrest": "https://crests.football-data.org/523.png"
       },
       {
         "id": 45,
