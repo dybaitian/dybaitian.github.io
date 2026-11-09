@@ -1,8 +1,55 @@
 {
-  "updated": "2026-11-09 06:11",
+  "updated": "2026-11-09 19:46",
   "today": {
-    "date": "2026-11-08",
-    "matches": []
+    "date": "2026-11-09",
+    "matches": [
+      {
+        "id": 1,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-14",
+        "tm": "05:30",
+        "h": "Mirassol FC",
+        "a": "CA Mineiro",
+        "hCn": "米拉索尔",
+        "aCn": "米内罗竞技",
+        "hr": 14,
+        "ar": 7,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近3次米拉索尔0胜0平3负 | 最近2026-05-16 客场 1-3",
+        "inj": "无关键伤停",
+        "fm": "主(WLWWW): 状态火爆，近5场4胜0平1负，主场强势 | 客(WLWLW): 状态良好，近5场3胜0平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/4364.png",
+        "aCrest": "https://crests.football-data.org/1766.png"
+      },
+      {
+        "id": 2,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-14",
+        "tm": "07:30",
+        "h": "Chapecoense AF",
+        "a": "CR Vasco da Gama",
+        "hCn": "沙佩科恩斯",
+        "aCn": "瓦斯科达伽马",
+        "hr": 20,
+        "ar": 13,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次沙佩科恩斯0胜0平1负 | 最近2026-07-23 主场 0-4",
+        "inj": "无关键伤停",
+        "fm": "主(LDDLL): 状态下滑，近5场0胜2平3负 | 客(LWDWW): 状态良好，近5场3胜1平1负，主场强势",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1772_large.png",
+        "aCrest": "https://crests.football-data.org/1780.png"
+      }
+    ]
   },
   "yesterday": {
     "date": "2026-07-20",
@@ -248,5 +295,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 0
+  "_total_count": 2
 }
