@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-13 06:32",
+  "updated": "2026-11-13 17:11",
   "today": {
-    "date": "2026-11-12",
+    "date": "2026-11-13",
     "matches": [
       {
         "id": 1,
@@ -29,6 +29,52 @@
       {
         "id": 2,
         "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-18",
+        "tm": "06:30",
+        "h": "Coritiba FBC",
+        "a": "Santos FC",
+        "hCn": "科里蒂巴",
+        "aCn": "桑托斯",
+        "hr": 12,
+        "ar": 9,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次科里蒂巴1胜0平0负 | 最近2026-05-17 客场 3-0",
+        "inj": "无关键伤停",
+        "fm": "主(WWWLD): 状态良好，近5场3胜1平1负 | 客(DDLDW): 状态平稳，近5场1胜3平1负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/4241.png",
+        "aCrest": "https://crests.football-data.org/6685.png"
+      },
+      {
+        "id": 3,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-18",
+        "tm": "07:00",
+        "h": "Clube do Remo",
+        "a": "Chapecoense AF",
+        "hCn": "里莫",
+        "aCn": "沙佩科恩斯",
+        "hr": 19,
+        "ar": 20,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次里莫1胜0平0负 | 最近2026-05-17 客场 3-2",
+        "inj": "无关键伤停",
+        "fm": "主(LLLWL): 状态低迷，近5场1胜0平4负，客场疲软 | 客(LDDLL): 状态下滑，近5场0胜2平3负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/4287.png",
+        "aCrest": "https://crests.football-data.org/1772_large.png"
+      },
+      {
+        "id": 4,
+        "lg": "🇧🇷 巴甲",
         "matchDay": "2026-11-14",
         "tm": "07:30",
         "h": "Chapecoense AF",
@@ -48,6 +94,52 @@
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1772_large.png",
         "aCrest": "https://crests.football-data.org/1780.png"
+      },
+      {
+        "id": 5,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-18",
+        "tm": "07:30",
+        "h": "Cruzeiro EC",
+        "a": "SE Palmeiras",
+        "hCn": "克鲁塞罗",
+        "aCn": "帕尔梅拉斯",
+        "hr": 3,
+        "ar": 2,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次克鲁塞罗0胜1平0负 | 最近2026-05-17 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(LWWWL): 状态良好，近5场3胜0平2负 | 客(DWDDL): 状态平稳，近5场1胜3平1负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1771.png",
+        "aCrest": "https://crests.football-data.org/1769.png"
+      },
+      {
+        "id": 6,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-18",
+        "tm": "07:30",
+        "h": "CR Flamengo",
+        "a": "CA Paranaense",
+        "hCn": "弗拉门戈",
+        "aCn": "巴拉纳竞技",
+        "hr": 1,
+        "ar": 5,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近2次弗拉门戈1胜1平0负 | 最近2026-05-17 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(DWDWL): 状态平稳，近5场2胜2平1负 | 客(LWWWL): 状态良好，近5场3胜0平2负，主场强势",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1783.png",
+        "aCrest": "https://crests.football-data.org/1768.png"
       }
     ]
   },
@@ -295,5 +387,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 2
+  "_total_count": 6
 }
