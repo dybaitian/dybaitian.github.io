@@ -1,7 +1,7 @@
 {
-  "updated": "2026-11-14 06:12",
+  "updated": "2026-11-14 15:49",
   "today": {
-    "date": "2026-11-13",
+    "date": "2026-11-14",
     "matches": [
       {
         "id": 1,
@@ -52,6 +52,52 @@
       {
         "id": 3,
         "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-19",
+        "tm": "06:30",
+        "h": "CR Vasco da Gama",
+        "a": "SC Internacional",
+        "hCn": "瓦斯科达伽马",
+        "aCn": "巴西国际",
+        "hr": 13,
+        "ar": 16,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次瓦斯科达伽马0胜0平1负 | 最近2026-05-16 客场 1-4",
+        "inj": "无关键伤停",
+        "fm": "主(LWDWW): 状态良好，近5场3胜1平1负，主场强势 | 客(LLWWD): 近5场2胜1平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1780.png",
+        "aCrest": "https://crests.football-data.org/6684.png"
+      },
+      {
+        "id": 4,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-19",
+        "tm": "06:30",
+        "h": "EC Vitória",
+        "a": "RB Bragantino",
+        "hCn": "维多利亚",
+        "aCn": "布拉甘蒂诺红牛",
+        "hr": 15,
+        "ar": 8,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次维多利亚0胜0平1负 | 最近2026-05-17 客场 0-2",
+        "inj": "无关键伤停",
+        "fm": "主(WLWLD): 近5场2胜1平2负 | 客(DLLLW): 状态下滑，近5场1胜1平3负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1782.png",
+        "aCrest": "https://crests.football-data.org/4286.png"
+      },
+      {
+        "id": 5,
+        "lg": "🇧🇷 巴甲",
         "matchDay": "2026-11-18",
         "tm": "07:00",
         "h": "Clube do Remo",
@@ -73,7 +119,7 @@
         "aCrest": "https://crests.football-data.org/1772_large.png"
       },
       {
-        "id": 4,
+        "id": 6,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-11-14",
         "tm": "07:30",
@@ -96,7 +142,7 @@
         "aCrest": "https://crests.football-data.org/1780.png"
       },
       {
-        "id": 5,
+        "id": 7,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-11-18",
         "tm": "07:30",
@@ -119,7 +165,7 @@
         "aCrest": "https://crests.football-data.org/1769.png"
       },
       {
-        "id": 6,
+        "id": 8,
         "lg": "🇧🇷 巴甲",
         "matchDay": "2026-11-18",
         "tm": "07:30",
@@ -140,6 +186,52 @@
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1783.png",
         "aCrest": "https://crests.football-data.org/1768.png"
+      },
+      {
+        "id": 9,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-18",
+        "tm": "08:30",
+        "h": "SC Corinthians Paulista",
+        "a": "Botafogo FR",
+        "hCn": "科林蒂安",
+        "aCn": "博塔弗戈",
+        "hr": 17,
+        "ar": 11,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次科林蒂安0胜0平1负 | 最近2026-05-17 客场 1-3",
+        "inj": "无关键伤停",
+        "fm": "主(WWLDW): 状态良好，近5场3胜1平1负，主场强势 | 客(LWLWW): 状态良好，近5场3胜0平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1779.png",
+        "aCrest": "https://crests.football-data.org/1770.png"
+      },
+      {
+        "id": 10,
+        "lg": "🇧🇷 巴甲",
+        "matchDay": "2026-11-18",
+        "tm": "08:30",
+        "h": "Grêmio FBPA",
+        "a": "EC Bahia",
+        "hCn": "格雷米奥",
+        "aCn": "巴伊亚",
+        "hr": 18,
+        "ar": 6,
+        "odds": "待获取",
+        "matchNum": "",
+        "isLottery": false,
+        "handicap": "",
+        "odds_hhad": "",
+        "h2h": "近1次格雷米奥0胜1平0负 | 最近2026-05-17 客场 1-1",
+        "inj": "无关键伤停",
+        "fm": "主(DDWLL): 近5场1胜2平2负 | 客(WWLWL): 状态良好，近5场3胜0平2负",
+        "xp": "football-data.org",
+        "hCrest": "https://crests.football-data.org/1767.png",
+        "aCrest": "https://crests.football-data.org/1777.png"
       }
     ]
   },
@@ -387,5 +479,5 @@
     }
   ],
   "_lottery_count": 0,
-  "_total_count": 6
+  "_total_count": 10
 }
