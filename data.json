@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18 11:50",
+  "updated": "2026-11-18 20:44",
   "today": {
     "date": "2026-11-18",
     "matches": [
@@ -1148,7 +1148,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(D): 近1场0胜1平0负 | 客(): 近0场0胜0平0负",
+        "fm": "主(DLDDL): 近5场0胜3平2负 | 客(DWLLW): 近5场2胜1平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/328.png",
         "aCrest": "https://crests.football-data.org/59.png"
@@ -1194,7 +1194,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(LD): 近2场0胜1平1负",
+        "fm": "主(WWDL): 近4场2胜1平1负 | 客(LDDLL): 状态下滑，近5场0胜2平3负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/340.png",
         "aCrest": "https://crests.football-data.org/342.png"
@@ -1217,7 +1217,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(LL): 近2场0胜0平2负 | 客(W): 近1场1胜0平0负",
+        "fm": "主(LLWWW): 状态良好，近5场3胜0平2负 | 客(WLDW): 近4场2胜1平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/68.png",
         "aCrest": "https://crests.football-data.org/715.png"
@@ -1240,7 +1240,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(L): 近1场0胜0平1负 | 客(): 近0场0胜0平0负",
+        "fm": "主(LLWLL): 状态低迷，近5场1胜0平4负，客场疲软 | 客(WLDW): 近4场2胜1平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/384.png",
         "aCrest": "https://crests.football-data.org/69.png"
@@ -1746,7 +1746,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "fm": "主(DWWL): 近4场2胜1平1负 | 客(LLWD): 近4场1胜1平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/356.png",
         "aCrest": "https://crests.football-data.org/346.png"
@@ -1769,7 +1769,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(WW): 近2场2胜0平0负 | 客(W): 近1场1胜0平0负",
+        "fm": "主(WWLWL): 状态良好，近5场3胜0平2负 | 客(WDWDW): 状态良好，近5场3胜2平0负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/72.png",
         "aCrest": "https://crests.football-data.org/74.png"
@@ -1792,7 +1792,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "fm": "主(WWLD): 近4场2胜1平1负 | 客(DWLL): 近4场1胜1平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/343.png",
         "aCrest": "https://crests.football-data.org/387.png"
@@ -1815,7 +1815,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "fm": "主(LLWL): 状态下滑，近4场1胜0平3负 | 客(DWDWL): 状态平稳，近5场2胜2平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/60.png",
         "aCrest": "https://crests.football-data.org/325.png"
@@ -1838,7 +1838,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(L): 近1场0胜0平1负",
+        "fm": "主(DWWW): 状态良好，近4场3胜1平0负 | 客(LWWW): 状态良好，近4场3胜0平1负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/70.png",
         "aCrest": "https://crests.football-data.org/332.png"
@@ -1861,7 +1861,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "fm": "主(WLLL): 状态下滑，近4场1胜0平3负 | 客(LLWD): 近4场1胜1平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/1126.png",
         "aCrest": "https://crests.football-data.org/404.png"
@@ -1884,7 +1884,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(): 近0场0胜0平0负",
+        "fm": "主(LLDL): 状态下滑，近4场0胜1平3负 | 客(DLLW): 近4场1胜1平2负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/563.png",
         "aCrest": "https://crests.football-data.org/1081.png"
@@ -1907,7 +1907,7 @@
         "odds_hhad": "",
         "h2h": "近期无交手记录",
         "inj": "无关键伤停",
-        "fm": "主(): 近0场0胜0平0负 | 客(W): 近1场1胜0平0负",
+        "fm": "主(DDWWW): 状态良好，近5场3胜2平0负 | 客(WLLLW): 状态下滑，近5场2胜0平3负",
         "xp": "football-data.org",
         "hCrest": "https://crests.football-data.org/76.png",
         "aCrest": "https://crests.football-data.org/348.png"
