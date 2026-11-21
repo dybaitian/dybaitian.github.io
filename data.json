@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20 20:25",
+  "updated": "2026-11-21 02:31",
   "today": {
     "date": "2026-11-20",
     "matches": [
@@ -496,7 +496,7 @@
         "hCn": "AS Monaco FC",
         "aCn": "AJ Auxerre",
         "hr": 7,
-        "ar": 14,
+        "ar": 15,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -564,7 +564,7 @@
         "a": "Stade Brestois 29",
         "hCn": "RC Strasbourg Alsace",
         "aCn": "Stade Brestois 29",
-        "hr": 13,
+        "hr": 14,
         "ar": 9,
         "odds": "待获取",
         "matchNum": "",
@@ -1186,7 +1186,7 @@
         "hCn": "Real Madrid CF",
         "aCn": "RC Celta de Vigo",
         "hr": 2,
-        "ar": 11,
+        "ar": 12,
         "odds": "待获取",
         "matchNum": "",
         "isLottery": false,
@@ -2404,7 +2404,7 @@
         "a": "Real Sociedad de Fútbol",
         "hCn": "Real Racing Club de Santander",
         "aCn": "Real Sociedad de Fútbol",
-        "hr": 10,
+        "hr": 11,
         "ar": 5,
         "odds": "待获取",
         "matchNum": "",
